@@ -73,9 +73,9 @@ synthgen/
 
 ### Phase 3: Data Generation
 
-- 🔲 Implement Data Synthesis Agent
-  - 🔲 Support distribution weights from reference data
-  - 🔲 Generate realistic data based on schema constraints
+- ✅ Implement Data Synthesis Agent
+  - ✅ Support distribution weights from reference data
+  - ✅ Generate realistic data based on schema constraints
 - 🔲 Build Validation Agent
 - 🔲 Implement Artifact Agent
 - 🔲 Complete CLI functionality
