@@ -1,0 +1,13 @@
+# [SampleOrdersDB.CustomerStatus]
+StatusCode, StatusDescription, Weight
+A, Active, 0.8
+I, Inactive, 0.15
+D, Deleted, 0.05
+
+# [SampleOrdersDB.ProductCategory]
+CategoryID, CategoryName, Description, Weight
+1, Electronics, Consumer electronics and gadgets, 0.35
+2, Clothing, Apparel and fashion items, 0.25
+3, Home, Home goods and furniture, 0.20
+4, Books, Books and publications, 0.15
+5, Other, Miscellaneous items, 0.05 

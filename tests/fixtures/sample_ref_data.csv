@@ -1,0 +1,30 @@
+# [Reference.Countries]
+CountryCode, CountryName, Continent
+US, United States, North America
+CA, Canada, North America
+UK, United Kingdom, Europe
+FR, France, Europe
+DE, Germany, Europe
+JP, Japan, Asia
+CN, China, Asia
+AU, Australia, Oceania
+
+# [Reference.Languages]
+LanguageCode, LanguageName, NativeName
+EN, English, English
+FR, French, Français
+DE, German, Deutsch
+ES, Spanish, Español
+IT, Italian, Italiano
+JA, Japanese, 日本語
+ZH, Chinese, 中文
+
+# [Reference.Currencies]
+CurrencyCode, CurrencyName, Symbol
+USD, US Dollar, $
+EUR, Euro, €
+GBP, British Pound, £
+JPY, Japanese Yen, ¥
+CAD, Canadian Dollar, $
+CNY, Chinese Yuan, ¥
+AUD, Australian Dollar, $ 
