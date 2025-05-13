@@ -44,6 +44,7 @@ def main():
     parser.add_argument("--schema-name", "-n", default="SampleOrdersDB", help="Specify the schema name (default: SampleOrdersDB)")
     parser.add_argument("--row-count", "-c", type=int, default=None, help="Override the default row count for all tables")
     parser.add_argument("--seed", "-s", type=int, default=42, help="Random seed for reproducible data generation (default: 42)")
+    parser.add_argument("--rules", default=None, help="Path to custom generation rules JSON file")
     args = parser.parse_args()
     
     verbose = args.verbose
@@ -51,12 +52,15 @@ def main():
     schema_name = args.schema_name
     custom_row_count = args.row_count
     seed = args.seed
+    rules_file = args.rules
     
     print("Testing Data Synthesis Agent...")
     print(f"Using model: {model}")
     print(f"Using seed: {seed}")
     if custom_row_count:
         print(f"Overriding row count to {custom_row_count} for all tables")
+    if rules_file:
+        print(f"Using custom generation rules from: {rules_file}")
     
     # Create a unique run ID for this test
     run_id = "test_data_synth_agent"
@@ -78,6 +82,27 @@ def main():
     else:
         ref_data_file = os.path.join(project_root, "tests", "fixtures", "sample_ref_data.csv")
     
+    # Load custom rules if specified
+    custom_rules = None
+    if rules_file:
+        try:
+            with open(rules_file, 'r') as f:
+                rules_data = json.load(f)
+                # Convert to the format expected by the DataSynthAgent
+                custom_rules = {}
+                for rule in rules_data.get("rules", []):
+                    target = rule.get("target", "")
+                    # If target is a table.column format, extract the table
+                    table_name = target.split(".")[0] if "." in target else target
+                    if table_name:
+                        if table_name not in custom_rules:
+                            custom_rules[table_name] = []
+                        custom_rules[table_name].append(rule)
+            print(f"Loaded {sum(len(rules) for rules in custom_rules.values())} rules for {len(custom_rules)} tables")
+        except Exception as e:
+            print(f"Error loading rules file: {str(e)}")
+            custom_rules = None
+
     # Step 1: Parse the SQL file to get the schema
     print(f"\n=== Step 1: Parsing SQL schema from {sql_file} ===")
     schema_parser = SchemaParseAgent(
@@ -144,7 +169,8 @@ def main():
     output_files = data_synth_agent.run(
         schema=enriched_schema,
         output_dir=output_dir,
-        row_counts=row_counts
+        row_counts=row_counts,
+        custom_rules=custom_rules
     )
     
     # Step 4: Summarize the generated data

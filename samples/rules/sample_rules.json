@@ -1,0 +1,70 @@
+{
+  "schemaName": "SampleOrdersDB",
+  "rules": [
+    {
+      "rule_id": "email_pattern",
+      "rule_type": "value_pattern",
+      "target": "Customer.Email",
+      "definition": {
+        "pattern": "${FirstName}.${LastName}@example.com",
+        "lowercase": true,
+        "alternatives": [
+          "${FirstName[0]}.${LastName}@example.com",
+          "${FirstName}.${LastName[0]}@example.com",
+          "${FirstName}${LastName[0:2]}@example.org"
+        ],
+        "alternative_probability": 0.3
+      },
+      "description": "Generate realistic email addresses based on customer names"
+    },
+    {
+      "rule_id": "price_distribution",
+      "rule_type": "distribution",
+      "target": "Product.UnitPrice",
+      "definition": {
+        "distribution": "log_normal",
+        "mean": 4.5,
+        "stddev": 0.5,
+        "min": 9.99,
+        "max": 999.99,
+        "round_to": 0.01
+      },
+      "description": "Product prices follow a log-normal distribution"
+    },
+    {
+      "rule_id": "order_date_time",
+      "rule_type": "time_pattern",
+      "target": "Order.OrderDate",
+      "definition": {
+        "start_date": "2023-01-01",
+        "end_date": "2023-12-31",
+        "business_hours_weight": 0.8,
+        "weekend_weight": 0.3,
+        "holiday_weight": 0.5,
+        "time_zone": "UTC"
+      },
+      "description": "Orders mostly occur during business hours and weekdays"
+    },
+    {
+      "rule_id": "related_products",
+      "rule_type": "relationship",
+      "target": "OrderDetail",
+      "definition": {
+        "relationships": [
+          {
+            "if_product_category": 1,
+            "then_likely_categories": [2, 3],
+            "probability": 0.7
+          },
+          {
+            "if_product_id": 1001,
+            "then_likely_products": [1002, 1003],
+            "probability": 0.5
+          }
+        ],
+        "max_related_items": 3
+      },
+      "description": "Related products are often purchased together"
+    }
+  ]
+} 

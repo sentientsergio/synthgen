@@ -158,3 +158,102 @@ We'll take an iterative approach, building and testing each component individual
 - Created demonstration script with sample schema and reference data
 
 This plan will be updated as development progresses to reflect completed work, changes in approach, and new requirements.
+
+## E-commerce Example Project Proposal
+
+This comprehensive example will demonstrate SynthGen's full capabilities with an e-commerce dataset.
+
+### 1. Enhanced E-commerce Schema
+
+While we have a basic schema (sample.sql), we can expand it to be more representative of real-world e-commerce systems:
+
+```
+E-commerce Schema Enhancements:
+- Add User/Account tables (separate from Customer)
+- Add Shipping and Payment information tables
+- Add Product Inventory management
+- Add Review/Rating system
+- Add Discount/Promotion functionality
+- Add geographical tables (Countries, States/Provinces)
+```
+
+### 2. Comprehensive Reference Data
+
+Create extensive reference data sets for all lookup tables:
+
+```
+Reference Data Sets:
+- CustomerStatus: Active, Inactive, Suspended, VIP, etc. with distribution weights
+- ProductCategory: Full hierarchy with weights (Electronics 30%, Clothing 25%, Home 20%, etc.)
+- Countries: 190+ countries with distribution weights reflecting real-world e-commerce trends
+- PaymentMethods: Credit card, PayPal, Bank transfer, etc. with realistic distributions
+- ShippingMethods: Standard, Express, Same-day, etc.
+- OrderStatus: Pending, Processing, Shipped, Delivered, Cancelled, Returned
+- ProductBrands: 50+ popular brands with proper distribution
+- UserRoles: Admin, Customer, Support, Marketing, etc.
+- Currencies: Major world currencies with exchange rates
+```
+
+### 3. Demonstration Rules (12 examples)
+
+A set of diverse generation rules that showcase the rule engine capabilities:
+
+#### Value Pattern Rules
+
+- Email Format Rule: Generate realistic email patterns based on first/last name
+- Phone Number Rule: Country-specific phone number formats
+
+#### Distribution Rules
+
+- Price Distribution Rule: Log-normal distribution for product prices
+- Order Value Rule: Higher-value orders less frequent than lower-value ones
+
+#### Relationship Rules
+
+- Shopping Pattern Rule: Customers who buy product X likely to buy product Y
+- Cross-category Rule: Ensure customers purchase across multiple categories
+
+#### Time-based Rules
+
+- Seasonal Ordering Rule: Increase certain product categories during holidays
+- Business Hours Rule: More orders during business hours than overnight
+
+#### Demographic Rules
+
+- Geographic Clustering Rule: Customers from same region buy similar products
+- Age Group Preference Rule: Different product preferences by age group
+
+#### Realistic Business Rules
+
+- Repeat Purchase Rule: Customers likely to buy same products again
+- Abandoned Cart Rule: Generate realistic cart abandonment scenarios
+
+### Implementation Plan
+
+1. **Schema Enhancement** (1-2 days)
+
+   - Extend the existing sample.sql with additional tables
+   - Document the schema relationships and constraints
+
+2. **Reference Data Creation** (2-3 days)
+
+   - Research realistic values and distributions
+   - Create CSV files for each reference table with proper weights
+   - Document the reasoning behind distributions
+
+3. **Generation Rules Development** (3-4 days)
+
+   - Create the rule JSON definitions
+   - Document each rule with examples
+   - Write test cases to validate rule behavior
+
+4. **Integration & Testing** (1-2 days)
+
+   - Create a comprehensive sample script that runs the entire pipeline
+   - Generate sample data with different rule combinations
+   - Validate that generated data follows expected patterns
+
+5. **Documentation** (1 day)
+   - Create a detailed guide explaining the example
+   - Include visualizations of data distributions
+   - Show how to extend and modify the rules
