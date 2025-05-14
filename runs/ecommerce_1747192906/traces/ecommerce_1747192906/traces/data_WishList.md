@@ -1,0 +1,10 @@
+1,101,Birthday Gifts,True,2023-09-15T10:23:00,2023-09-20T14:45:00
+2,102,Christmas Wishlist,False,2023-10-01T08:30:00,None
+3,103,Travel Essentials,True,2023-08-12T11:15:00,2023-09-10T09:00:00
+4,104,Home Improvement,False,2023-07-21T14:50:00,None
+5,105,Books to Read,True,2023-06-30T16:20:00,2023-07-05T12:00:00
+6,106,Gadgets,False,2023-05-18T09:45:00,None
+7,107,Fitness Gear,True,2023-04-10T13:30:00,2023-05-01T10:00:00
+8,108,Music Instruments,False,2023-03-25T15:00:00,None
+9,109,Cooking Supplies,True,2023-02-14T17:45:00,2023-03-01T11:30:00
+10,110,Art Supplies,False,2023-01-05T12:00:00,None

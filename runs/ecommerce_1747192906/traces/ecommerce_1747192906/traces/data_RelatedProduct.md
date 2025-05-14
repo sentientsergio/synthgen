@@ -1,0 +1,10 @@
+1,101,202,CrossSell,1
+2,102,203,UpSell,2
+3,103,204,Accessory,3
+4,104,205,Similar,4
+5,105,206,CrossSell,5
+6,106,207,UpSell,6
+7,107,208,Accessory,7
+8,108,209,Similar,8
+9,109,210,CrossSell,9
+10,110,211,UpSell,10

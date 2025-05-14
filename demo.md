@@ -17,7 +17,7 @@ The process involves four main steps:
 
 The demo uses three primary input files:
 
-### 1. SQL Schema (`/samples/sql/ecommerce.sql`)
+### 1. SQL Schema (`samples/sql/ecommerce.sql`)
 
 This file contains the SQL DDL (Data Definition Language) statements that define the structure of the e-commerce database. It includes:
 
@@ -34,9 +34,9 @@ The schema includes tables for:
 - Order management (Orders, items, history, shipping)
 - Marketing & analytics (Wishlists, product views, user searches)
 
-[View the Input Schema File](/Users/sergio/synthgen/runs/ecommerce_1747192906/inputs/ecommerce.sql)
+[View the Input Schema File](runs/ecommerce_1747192906/inputs/ecommerce.sql)
 
-### 2. Reference Data (`/samples/ecommerce_reference.csv`)
+### 2. Reference Data (`samples/ref_data/ecommerce_reference.csv`)
 
 This CSV file contains pre-defined reference data for lookup tables in the schema. It provides baseline data for tables like:
 
@@ -49,9 +49,9 @@ This CSV file contains pre-defined reference data for lookup tables in the schem
 
 The reference data ensures that generated data has realistic values for these core entities and maintains referential integrity.
 
-[View the Reference Data File](/Users/sergio/synthgen/runs/ecommerce_1747192906/inputs/ecommerce_reference.csv)
+[View the Reference Data File](runs/ecommerce_1747192906/inputs/ecommerce_reference.csv)
 
-### 3. Generation Rules (`/samples/rules/ecommerce_rules.json`)
+### 3. Generation Rules (`samples/rules/ecommerce_rules.json`)
 
 This JSON file defines rules and patterns for data generation, including:
 
@@ -62,33 +62,33 @@ This JSON file defines rules and patterns for data generation, including:
 
 These rules guide the data generation process to create realistic relationships and distributions in the data.
 
-[View the Rules File](/Users/sergio/synthgen/runs/ecommerce_1747192906/inputs/ecommerce_rules.json)
+[View the Rules File](runs/ecommerce_1747192906/inputs/ecommerce_rules.json)
 
 ## Intermediate Representation (IR) Files
 
-During the process, SynthGen creates several IR (Intermediate Representation) files that represent the processed input data in a standardized format. These files are stored in the `/runs/[run_id]/ir/` directory:
+During the process, SynthGen creates several IR (Intermediate Representation) files that represent the processed input data in a standardized format. These files are stored in the `runs/[run_id]/ir/` directory:
 
 ### 1. Schema IR (`schema_ir.json`)
 
 This file contains the parsed SQL schema in a structured JSON format. It includes all tables, columns, data types, primary keys, foreign keys, and constraints from the SQL schema. The parser extracts this information and organizes it in a way that's easy for the downstream components to use.
 
-[View the Schema IR File](/Users/sergio/synthgen/runs/ecommerce_1747192906/ir/schema_ir.json)
+[View the Schema IR File](runs/ecommerce_1747192906/ir/schema_ir.json)
 
 ### 2. Reference Data IR (`ref_data_ir.json`)
 
 This file extends the schema IR by incorporating the reference data. It maps the data from the CSV file to the appropriate tables and columns in the schema, creating a unified representation of the database structure with pre-populated reference data.
 
-[View the Reference Data IR File](/Users/sergio/synthgen/runs/ecommerce_1747192906/ir/ref_data_ir.json)
+[View the Reference Data IR File](runs/ecommerce_1747192906/ir/ref_data_ir.json)
 
 ### 3. Rules IR (`rules_ir.json`)
 
 This file contains the processed generation rules in a format that's ready to be consumed by the data synthesis agent. It maps rules to specific tables and columns and provides the detailed instructions for generating synthetic data.
 
-[View the Rules IR File](/Users/sergio/synthgen/runs/ecommerce_1747192906/ir/rules_ir.json)
+[View the Rules IR File](runs/ecommerce_1747192906/ir/rules_ir.json)
 
 ## Traces and Logging
 
-SynthGen maintains detailed traces and logs of the generation process in the `/runs/[run_id]/traces/` directory:
+SynthGen maintains detailed traces and logs of the generation process in the `runs/[run_id]/traces/` directory:
 
 ### 1. Agent Prompts and Responses
 
@@ -100,65 +100,65 @@ For each LLM call, the system saves:
 
 These traces provide transparency into how the system is generating data and can be used for debugging or improving the generation process.
 
-[Browse All Traces](/Users/sergio/synthgen/runs/ecommerce_1747192906/traces/ecommerce_1747192906/traces)
+[Browse All Traces](runs/ecommerce_1747192906/traces)
 
 Example traces:
 
-- [Schema Parser Prompt](/Users/sergio/synthgen/runs/ecommerce_1747192906/traces/ecommerce_1747192906/traces/SchemaParser_prompt.md)
-- [DataSynthAgent Prompt (Product)](/Users/sergio/synthgen/runs/ecommerce_1747192906/traces/ecommerce_1747192906/traces/DataSynthAgent_prompt.md)
-- [LLM Response (User table)](/Users/sergio/synthgen/runs/ecommerce_1747192906/traces/ecommerce_1747192906/traces/llm_response_User.md)
-- [Generated Data (Product table)](/Users/sergio/synthgen/runs/ecommerce_1747192906/traces/ecommerce_1747192906/traces/data_Product.md)
+- [Schema Parser Prompt](runs/ecommerce_1747192906/traces/SchemaParser_prompt.md)
+- [DataSynthAgent Prompt (Product)](runs/ecommerce_1747192906/traces/DataSynthAgent_prompt.md)
+- [LLM Response (User table)](runs/ecommerce_1747192906/traces/llm_response_User.md)
+- [Generated Data (Product table)](runs/ecommerce_1747192906/traces/data_Product.md)
 
 ### 2. Input/Output Schema
 
 The system also saves copies of the schema before and after processing:
 
-- [Input Schema](/Users/sergio/synthgen/runs/ecommerce_1747192906/traces/ecommerce_1747192906/traces/input_schema.json)
-- [Output Schema](/Users/sergio/synthgen/runs/ecommerce_1747192906/traces/ecommerce_1747192906/traces/output_schema.json)
+- [Input Schema](runs/ecommerce_1747192906/traces/input_schema.json)
+- [Output Schema](runs/ecommerce_1747192906/traces/output_schema.json)
 
 These can be used to track changes and transformations.
 
 ## Output Files
 
-The final output of the demo is a set of CSV files representing the generated data for each table in the schema. These files are stored in the `/runs/[run_id]/outputs/` directory.
+The final output of the demo is a set of CSV files representing the generated data for each table in the schema. These files are stored in the `runs/[run_id]/outputs/` directory.
 
-[Browse All Output Files](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs)
+[Browse All Output Files](runs/ecommerce_1747192906/outputs)
 
 The main output files include:
 
 ### Reference Data Files
 
-- [Country.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/Country.csv), [StateProvince.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/StateProvince.csv) - Geographical data
-- [Currency.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/Currency.csv) - Currency information
-- [PaymentMethod.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/PaymentMethod.csv), [ShippingMethod.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/ShippingMethod.csv) - Transaction methods
-- [OrderStatus.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/OrderStatus.csv), [UserStatus.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/UserStatus.csv), [UserRole.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/UserRole.csv) - Status and role definitions
-- [ProductCategory.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/ProductCategory.csv), [ProductBrand.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/ProductBrand.csv) - Product categorization
+- [Country.csv](runs/ecommerce_1747192906/outputs/Country.csv), [StateProvince.csv](runs/ecommerce_1747192906/outputs/StateProvince.csv) - Geographical data
+- [Currency.csv](runs/ecommerce_1747192906/outputs/Currency.csv) - Currency information
+- [PaymentMethod.csv](runs/ecommerce_1747192906/outputs/PaymentMethod.csv), [ShippingMethod.csv](runs/ecommerce_1747192906/outputs/ShippingMethod.csv) - Transaction methods
+- [OrderStatus.csv](runs/ecommerce_1747192906/outputs/OrderStatus.csv), [UserStatus.csv](runs/ecommerce_1747192906/outputs/UserStatus.csv), [UserRole.csv](runs/ecommerce_1747192906/outputs/UserRole.csv) - Status and role definitions
+- [ProductCategory.csv](runs/ecommerce_1747192906/outputs/ProductCategory.csv), [ProductBrand.csv](runs/ecommerce_1747192906/outputs/ProductBrand.csv) - Product categorization
 
 ### Core Data Files
 
-- [User.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/User.csv) - User accounts with profiles and preferences
-- [UserAddress.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/UserAddress.csv) - User shipping and billing addresses
-- [UserPaymentMethod.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/UserPaymentMethod.csv) - User payment methods (tokenized for security)
-- [Product.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/Product.csv) - Product information including pricing and inventory
-- [ProductVariant.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/ProductVariant.csv) - Product size/color variations
-- [ProductImage.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/ProductImage.csv) - Product images and display order
-- [ProductReview.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/ProductReview.csv) - User reviews and ratings of products
+- [User.csv](runs/ecommerce_1747192906/outputs/User.csv) - User accounts with profiles and preferences
+- [UserAddress.csv](runs/ecommerce_1747192906/outputs/UserAddress.csv) - User shipping and billing addresses
+- [UserPaymentMethod.csv](runs/ecommerce_1747192906/outputs/UserPaymentMethod.csv) - User payment methods (tokenized for security)
+- [Product.csv](runs/ecommerce_1747192906/outputs/Product.csv) - Product information including pricing and inventory
+- [ProductVariant.csv](runs/ecommerce_1747192906/outputs/ProductVariant.csv) - Product size/color variations
+- [ProductImage.csv](runs/ecommerce_1747192906/outputs/ProductImage.csv) - Product images and display order
+- [ProductReview.csv](runs/ecommerce_1747192906/outputs/ProductReview.csv) - User reviews and ratings of products
 
 ### Transaction Data Files
 
-- [Order.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/Order.csv) - Order header information
-- [OrderItem.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/OrderItem.csv) - Individual line items in orders
-- [OrderHistory.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/OrderHistory.csv) - Status changes of orders
-- [ShippingEvent.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/ShippingEvent.csv) - Shipping and delivery information
-- [OrderPromotion.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/OrderPromotion.csv) - Promotions applied to orders
+- [Order.csv](runs/ecommerce_1747192906/outputs/Order.csv) - Order header information
+- [OrderItem.csv](runs/ecommerce_1747192906/outputs/OrderItem.csv) - Individual line items in orders
+- [OrderHistory.csv](runs/ecommerce_1747192906/outputs/OrderHistory.csv) - Status changes of orders
+- [ShippingEvent.csv](runs/ecommerce_1747192906/outputs/ShippingEvent.csv) - Shipping and delivery information
+- [OrderPromotion.csv](runs/ecommerce_1747192906/outputs/OrderPromotion.csv) - Promotions applied to orders
 
 ### Marketing Data Files
 
-- [Promotion.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/Promotion.csv), [PromotionProduct.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/PromotionProduct.csv), [PromotionCategory.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/PromotionCategory.csv) - Marketing promotions
-- [WishList.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/WishList.csv), [WishListItem.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/WishListItem.csv) - User wishlists
-- [ProductView.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/ProductView.csv) - Product view tracking
-- [UserSearch.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/UserSearch.csv) - User search history
-- [EmailSubscription.csv](/Users/sergio/synthgen/runs/ecommerce_1747192906/outputs/EmailSubscription.csv) - Email marketing subscriptions
+- [Promotion.csv](runs/ecommerce_1747192906/outputs/Promotion.csv), [PromotionProduct.csv](runs/ecommerce_1747192906/outputs/PromotionProduct.csv), [PromotionCategory.csv](runs/ecommerce_1747192906/outputs/PromotionCategory.csv) - Marketing promotions
+- [WishList.csv](runs/ecommerce_1747192906/outputs/WishList.csv), [WishListItem.csv](runs/ecommerce_1747192906/outputs/WishListItem.csv) - User wishlists
+- [ProductView.csv](runs/ecommerce_1747192906/outputs/ProductView.csv) - Product view tracking
+- [UserSearch.csv](runs/ecommerce_1747192906/outputs/UserSearch.csv) - User search history
+- [EmailSubscription.csv](runs/ecommerce_1747192906/outputs/EmailSubscription.csv) - Email marketing subscriptions
 
 All output files maintain referential integrity, with foreign keys properly linking related records across tables.
 
@@ -252,7 +252,7 @@ You can customize the generation by providing command-line arguments:
 python samples/ecommerce_demo.py --users 200 --products 500 --orders 1000 --reviews 300
 ```
 
-You can also change which LLM model is used by modifying the `DEFAULT_LLM_MODEL` in [constants.py](/Users/sergio/synthgen/constants.py).
+You can also change which LLM model is used by modifying the `DEFAULT_LLM_MODEL` in `constants.py`.
 
 After running the demo, you'll find all outputs in a timestamped directory under the `runs/` folder.
 

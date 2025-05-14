@@ -1,0 +1,4405 @@
+{
+  "name": "EcommerceDB",
+  "tables": [
+    {
+      "name": "Country",
+      "columns": [
+        {
+          "name": "CountryID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the Country table."
+        },
+        {
+          "name": "CountryCode",
+          "data_type": "CHAR",
+          "nullable": false,
+          "length": 2,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "ISO 3166-1 alpha-2 country code."
+        },
+        {
+          "name": "CountryName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the country."
+        },
+        {
+          "name": "PhonePrefix",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "length": 10,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "International phone prefix for the country."
+        },
+        {
+          "name": "IsSupported",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the country is supported."
+        }
+      ],
+      "primary_key": {
+        "name": "PK_Country",
+        "columns": [
+          "CountryID"
+        ]
+      },
+      "foreign_keys": [],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table storing country information with ISO codes and phone prefixes."
+    },
+    {
+      "name": "StateProvince",
+      "columns": [
+        {
+          "name": "StateProvinceID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the StateProvince table."
+        },
+        {
+          "name": "CountryID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the Country table."
+        },
+        {
+          "name": "StateCode",
+          "data_type": "CHAR",
+          "nullable": false,
+          "length": 5,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Code representing the state or province."
+        },
+        {
+          "name": "StateName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the state or province."
+        }
+      ],
+      "primary_key": {
+        "name": "PK_StateProvince",
+        "columns": [
+          "StateProvinceID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_StateProvince_Country",
+          "columns": [
+            "CountryID"
+          ],
+          "ref_table": "Country",
+          "ref_columns": [
+            "CountryID"
+          ],
+          "on_delete": "NO ACTION",
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table representing state or province information."
+    },
+    {
+      "name": "Currency",
+      "columns": [
+        {
+          "name": "CurrencyID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the currency table."
+        },
+        {
+          "name": "CurrencyCode",
+          "data_type": "CHAR",
+          "nullable": false,
+          "length": 3,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "ISO 4217 currency code."
+        },
+        {
+          "name": "CurrencyName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the currency."
+        },
+        {
+          "name": "CurrencySymbol",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 5,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Symbol of the currency."
+        },
+        {
+          "name": "ExchangeRate",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 18,
+          "scale": 6,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Exchange rate of the currency."
+        },
+        {
+          "name": "IsDefault",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if this is the default currency."
+        },
+        {
+          "name": "IsSupported",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if this currency is supported."
+        }
+      ],
+      "primary_key": {
+        "name": "PK_Currency",
+        "columns": [
+          "CurrencyID"
+        ]
+      },
+      "foreign_keys": [],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store currency information including exchange rates and symbols."
+    },
+    {
+      "name": "PaymentMethod",
+      "columns": [
+        {
+          "name": "PaymentMethodID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Unique identifier for each payment method"
+        },
+        {
+          "name": "PaymentMethodName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the payment method"
+        },
+        {
+          "name": "Description",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Description of the payment method"
+        },
+        {
+          "name": "IsActive",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the payment method is active"
+        },
+        {
+          "name": "DisplayOrder",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Order in which the payment method is displayed"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_PaymentMethod",
+        "columns": [
+          "PaymentMethodID"
+        ]
+      },
+      "foreign_keys": [],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table for storing payment methods"
+    },
+    {
+      "name": "ShippingMethod",
+      "columns": [
+        {
+          "name": "ShippingMethodID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Unique identifier for each shipping method"
+        },
+        {
+          "name": "ShippingMethodName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the shipping method"
+        },
+        {
+          "name": "Description",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Description of the shipping method"
+        },
+        {
+          "name": "BasePrice",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Base price for the shipping method"
+        },
+        {
+          "name": "EstimatedDays",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Estimated delivery days for the shipping method"
+        },
+        {
+          "name": "IsActive",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the shipping method is active"
+        },
+        {
+          "name": "DisplayOrder",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Order in which the shipping method is displayed"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_ShippingMethod",
+        "columns": [
+          "ShippingMethodID"
+        ]
+      },
+      "foreign_keys": [],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table for storing different shipping methods"
+    },
+    {
+      "name": "OrderStatus",
+      "columns": [
+        {
+          "name": "OrderStatusID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the order status"
+        },
+        {
+          "name": "StatusName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the status"
+        },
+        {
+          "name": "Description",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Description of the status"
+        },
+        {
+          "name": "IsActive",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the status is active"
+        },
+        {
+          "name": "DisplayOrder",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Order in which the status is displayed"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_OrderStatus",
+        "columns": [
+          "OrderStatusID"
+        ]
+      },
+      "foreign_keys": [],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store order status information"
+    },
+    {
+      "name": "UserStatus",
+      "columns": [
+        {
+          "name": "UserStatusID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for UserStatus"
+        },
+        {
+          "name": "StatusName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the status"
+        },
+        {
+          "name": "Description",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Description of the status"
+        },
+        {
+          "name": "IsActive",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the status is active"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_UserStatus",
+        "columns": [
+          "UserStatusID"
+        ]
+      },
+      "foreign_keys": [],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store user status information"
+    },
+    {
+      "name": "UserRole",
+      "columns": [
+        {
+          "name": "UserRoleID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for UserRole"
+        },
+        {
+          "name": "RoleName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the role"
+        },
+        {
+          "name": "Description",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Description of the role"
+        },
+        {
+          "name": "IsActive",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the role is active"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_UserRole",
+        "columns": [
+          "UserRoleID"
+        ]
+      },
+      "foreign_keys": [],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store user roles"
+    },
+    {
+      "name": "ProductCategory",
+      "columns": [
+        {
+          "name": "CategoryID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the product category"
+        },
+        {
+          "name": "ParentCategoryID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the parent category"
+        },
+        {
+          "name": "CategoryName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the category"
+        },
+        {
+          "name": "Description",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 500,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Description of the category"
+        },
+        {
+          "name": "ImageURL",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "URL of the category image"
+        },
+        {
+          "name": "IsActive",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the category is active"
+        },
+        {
+          "name": "DisplayOrder",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Order in which the category is displayed"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_ProductCategory",
+        "columns": [
+          "CategoryID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_ProductCategory_ParentCategory",
+          "columns": [
+            "ParentCategoryID"
+          ],
+          "ref_table": "ProductCategory",
+          "ref_columns": [
+            "CategoryID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table for storing product categories"
+    },
+    {
+      "name": "ProductBrand",
+      "columns": [
+        {
+          "name": "BrandID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Unique identifier for each brand"
+        },
+        {
+          "name": "BrandName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the brand"
+        },
+        {
+          "name": "Description",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 500,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Description of the brand"
+        },
+        {
+          "name": "LogoURL",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "URL of the brand's logo"
+        },
+        {
+          "name": "Website",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Website of the brand"
+        },
+        {
+          "name": "IsActive",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the brand is active"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_ProductBrand",
+        "columns": [
+          "BrandID"
+        ]
+      },
+      "foreign_keys": [],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table for storing product brand information"
+    },
+    {
+      "name": "User",
+      "columns": [
+        {
+          "name": "UserID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the User table"
+        },
+        {
+          "name": "Email",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "User's email address"
+        },
+        {
+          "name": "PasswordHash",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Hashed password of the user"
+        },
+        {
+          "name": "FirstName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "User's first name"
+        },
+        {
+          "name": "LastName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "User's last name"
+        },
+        {
+          "name": "PhoneNumber",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 20,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "User's phone number"
+        },
+        {
+          "name": "BirthDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "User's birth date"
+        },
+        {
+          "name": "UserStatusID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key to UserStatus table"
+        },
+        {
+          "name": "UserRoleID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key to UserRole table"
+        },
+        {
+          "name": "PreferredCurrencyID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key to Currency table"
+        },
+        {
+          "name": "RegistrationDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the user registered"
+        },
+        {
+          "name": "LastLoginDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date of the user's last login"
+        },
+        {
+          "name": "CreatedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the record was created"
+        },
+        {
+          "name": "ModifiedDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the record was last modified"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_User",
+        "columns": [
+          "UserID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_User_UserStatus",
+          "columns": [
+            "UserStatusID"
+          ],
+          "ref_table": "UserStatus",
+          "ref_columns": [
+            "UserStatusID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_User_UserRole",
+          "columns": [
+            "UserRoleID"
+          ],
+          "ref_table": "UserRole",
+          "ref_columns": [
+            "UserRoleID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_User_Currency",
+          "columns": [
+            "PreferredCurrencyID"
+          ],
+          "ref_table": "Currency",
+          "ref_columns": [
+            "CurrencyID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table storing user information"
+    },
+    {
+      "name": "UserAddress",
+      "columns": [
+        {
+          "name": "AddressID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the UserAddress table."
+        },
+        {
+          "name": "UserID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the User table."
+        },
+        {
+          "name": "AddressType",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 20,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Type of address, either 'Billing' or 'Shipping'."
+        },
+        {
+          "name": "IsDefault",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if this is the default address."
+        },
+        {
+          "name": "FirstName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "First name of the address holder."
+        },
+        {
+          "name": "LastName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Last name of the address holder."
+        },
+        {
+          "name": "Address1",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Primary address line."
+        },
+        {
+          "name": "Address2",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Secondary address line."
+        },
+        {
+          "name": "City",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "City of the address."
+        },
+        {
+          "name": "StateProvinceID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the StateProvince table."
+        },
+        {
+          "name": "PostalCode",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 20,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Postal code of the address."
+        },
+        {
+          "name": "CountryID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the Country table."
+        },
+        {
+          "name": "PhoneNumber",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 20,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Phone number associated with the address."
+        }
+      ],
+      "primary_key": {
+        "name": "PK_UserAddress",
+        "columns": [
+          "AddressID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_UserAddress_User",
+          "columns": [
+            "UserID"
+          ],
+          "ref_table": "User",
+          "ref_columns": [
+            "UserID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_UserAddress_Country",
+          "columns": [
+            "CountryID"
+          ],
+          "ref_table": "Country",
+          "ref_columns": [
+            "CountryID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_UserAddress_StateProvince",
+          "columns": [
+            "StateProvinceID"
+          ],
+          "ref_table": "StateProvince",
+          "ref_columns": [
+            "StateProvinceID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [
+        {
+          "name": "CK_UserAddress_Type",
+          "definition": "AddressType IN ('Billing', 'Shipping')"
+        }
+      ],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table storing user addresses with types such as 'Billing' and 'Shipping'."
+    },
+    {
+      "name": "UserPaymentMethod",
+      "columns": [
+        {
+          "name": "UserPaymentMethodID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the UserPaymentMethod table"
+        },
+        {
+          "name": "UserID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing User table"
+        },
+        {
+          "name": "PaymentMethodID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing PaymentMethod table"
+        },
+        {
+          "name": "IsDefault",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if this is the default payment method"
+        },
+        {
+          "name": "AccountName",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name on the account"
+        },
+        {
+          "name": "PaymentToken",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Token for payment processing"
+        },
+        {
+          "name": "Last4Digits",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 4,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Last four digits of the payment method"
+        },
+        {
+          "name": "ExpiryMonth",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Expiry month of the payment method"
+        },
+        {
+          "name": "ExpiryYear",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Expiry year of the payment method"
+        },
+        {
+          "name": "BillingAddressID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing UserAddress table"
+        },
+        {
+          "name": "CreatedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date the record was created"
+        },
+        {
+          "name": "ModifiedDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date the record was last modified"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_UserPaymentMethod",
+        "columns": [
+          "UserPaymentMethodID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_UserPaymentMethod_User",
+          "columns": [
+            "UserID"
+          ],
+          "ref_table": "User",
+          "ref_columns": [
+            "UserID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_UserPaymentMethod_PaymentMethod",
+          "columns": [
+            "PaymentMethodID"
+          ],
+          "ref_table": "PaymentMethod",
+          "ref_columns": [
+            "PaymentMethodID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_UserPaymentMethod_BillingAddress",
+          "columns": [
+            "BillingAddressID"
+          ],
+          "ref_table": "UserAddress",
+          "ref_columns": [
+            "AddressID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table storing user payment methods"
+    },
+    {
+      "name": "Product",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Unique identifier for each product"
+        },
+        {
+          "name": "SKU",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Stock Keeping Unit, unique for each product"
+        },
+        {
+          "name": "ProductName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the product"
+        },
+        {
+          "name": "Description",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": "MAX",
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Detailed description of the product"
+        },
+        {
+          "name": "CategoryID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Identifier for the product category"
+        },
+        {
+          "name": "BrandID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Identifier for the product brand"
+        },
+        {
+          "name": "BasePrice",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Base price of the product"
+        },
+        {
+          "name": "DiscountPercentage",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "length": null,
+          "precision": 5,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Discount percentage applicable to the product"
+        },
+        {
+          "name": "TaxRate",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "length": null,
+          "precision": 5,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Tax rate applicable to the product"
+        },
+        {
+          "name": "Weight",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Weight of the product"
+        },
+        {
+          "name": "Dimensions",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Dimensions of the product in L x W x H format"
+        },
+        {
+          "name": "InventoryCount",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Number of items available in inventory"
+        },
+        {
+          "name": "ReorderThreshold",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Threshold for reordering the product"
+        },
+        {
+          "name": "IsPhysical",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the product is physical (1) or digital (0)"
+        },
+        {
+          "name": "IsActive",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the product is active"
+        },
+        {
+          "name": "IsDiscontinued",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the product is discontinued"
+        },
+        {
+          "name": "CreatedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the product was created"
+        },
+        {
+          "name": "ModifiedDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the product was last modified"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_Product",
+        "columns": [
+          "ProductID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_Product_Category",
+          "columns": [
+            "CategoryID"
+          ],
+          "ref_table": "ProductCategory",
+          "ref_columns": [
+            "CategoryID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_Product_Brand",
+          "columns": [
+            "BrandID"
+          ],
+          "ref_table": "ProductBrand",
+          "ref_columns": [
+            "BrandID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [
+        {
+          "name": "CK_Product_BasePrice",
+          "definition": "BasePrice >= 0"
+        },
+        {
+          "name": "CK_Product_DiscountPercentage",
+          "definition": "DiscountPercentage >= 0 AND DiscountPercentage <= 100"
+        }
+      ],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table storing product details"
+    },
+    {
+      "name": "ProductImage",
+      "columns": [
+        {
+          "name": "ProductImageID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the ProductImage table"
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing Product table"
+        },
+        {
+          "name": "ImageURL",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "URL of the product image"
+        },
+        {
+          "name": "ImageAlt",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Alternative text for the image"
+        },
+        {
+          "name": "IsPrimary",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the image is the primary image for the product"
+        },
+        {
+          "name": "DisplayOrder",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Order in which the image is displayed"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_ProductImage",
+        "columns": [
+          "ProductImageID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_ProductImage_Product",
+          "columns": [
+            "ProductID"
+          ],
+          "ref_table": "Product",
+          "ref_columns": [
+            "ProductID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table storing images related to products"
+    },
+    {
+      "name": "ProductVariant",
+      "columns": [
+        {
+          "name": "VariantID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Unique identifier for each product variant."
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Identifier for the associated product."
+        },
+        {
+          "name": "VariantName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the product variant."
+        },
+        {
+          "name": "SKU",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Stock Keeping Unit for the variant."
+        },
+        {
+          "name": "PriceAdjustment",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Price adjustment for the variant."
+        },
+        {
+          "name": "InventoryCount",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Inventory count for the variant."
+        },
+        {
+          "name": "IsActive",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the variant is active."
+        }
+      ],
+      "primary_key": {
+        "name": "PK_ProductVariant",
+        "columns": [
+          "VariantID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_ProductVariant_Product",
+          "columns": [
+            "ProductID"
+          ],
+          "ref_table": "Product",
+          "ref_columns": [
+            "ProductID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store product variants with pricing and inventory details."
+    },
+    {
+      "name": "ProductReview",
+      "columns": [
+        {
+          "name": "ReviewID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Unique identifier for each review"
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Identifier for the product being reviewed"
+        },
+        {
+          "name": "UserID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Identifier for the user who wrote the review"
+        },
+        {
+          "name": "Rating",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Rating given by the user, between 1 and 5"
+        },
+        {
+          "name": "Title",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Title of the review"
+        },
+        {
+          "name": "ReviewText",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 1000,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Text of the review"
+        },
+        {
+          "name": "IsVerifiedPurchase",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the review is from a verified purchase"
+        },
+        {
+          "name": "IsApproved",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the review is approved by moderators"
+        },
+        {
+          "name": "CreatedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the review was created"
+        },
+        {
+          "name": "ModifiedDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the review was last modified"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_ProductReview",
+        "columns": [
+          "ReviewID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_ProductReview_Product",
+          "columns": [
+            "ProductID"
+          ],
+          "ref_table": "Product",
+          "ref_columns": [
+            "ProductID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_ProductReview_User",
+          "columns": [
+            "UserID"
+          ],
+          "ref_table": "User",
+          "ref_columns": [
+            "UserID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [
+        {
+          "name": "CK_ProductReview_Rating",
+          "definition": "Rating BETWEEN 1 AND 5"
+        }
+      ],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store product reviews by users"
+    },
+    {
+      "name": "RelatedProduct",
+      "columns": [
+        {
+          "name": "RelatedProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the RelatedProduct table."
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "ID of the product that has a relation."
+        },
+        {
+          "name": "RelatedToProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "ID of the product to which the relation is made."
+        },
+        {
+          "name": "RelationType",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 20,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Type of relation such as 'CrossSell', 'UpSell', 'Accessory', or 'Similar'."
+        },
+        {
+          "name": "DisplayOrder",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Order in which the related products are displayed."
+        }
+      ],
+      "primary_key": {
+        "name": "PK_RelatedProduct",
+        "columns": [
+          "RelatedProductID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_RelatedProduct_Product",
+          "columns": [
+            "ProductID"
+          ],
+          "ref_table": "Product",
+          "ref_columns": [
+            "ProductID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_RelatedProduct_RelatedToProduct",
+          "columns": [
+            "RelatedToProductID"
+          ],
+          "ref_table": "Product",
+          "ref_columns": [
+            "ProductID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [
+        {
+          "name": "CK_RelatedProduct_Type",
+          "definition": "RelationType IN ('CrossSell', 'UpSell', 'Accessory', 'Similar')"
+        },
+        {
+          "name": "CK_RelatedProduct_NotSelf",
+          "definition": "ProductID != RelatedToProductID"
+        }
+      ],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store related products with different types of relationships."
+    },
+    {
+      "name": "Promotion",
+      "columns": [
+        {
+          "name": "PromotionID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Unique identifier for each promotion"
+        },
+        {
+          "name": "PromotionName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the promotion"
+        },
+        {
+          "name": "Description",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 500,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Description of the promotion"
+        },
+        {
+          "name": "DiscountType",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 20,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Type of discount: 'Percentage', 'FixedAmount', 'FreeShipping'"
+        },
+        {
+          "name": "DiscountValue",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Value of the discount"
+        },
+        {
+          "name": "CouponCode",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 20,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Optional coupon code for the promotion"
+        },
+        {
+          "name": "RequiredMinimumPurchase",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Minimum purchase required to apply the promotion"
+        },
+        {
+          "name": "StartDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Start date of the promotion"
+        },
+        {
+          "name": "EndDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "End date of the promotion"
+        },
+        {
+          "name": "IsActive",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the promotion is active"
+        },
+        {
+          "name": "MaximumUses",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Maximum number of times the promotion can be used"
+        },
+        {
+          "name": "CurrentUses",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Current number of times the promotion has been used"
+        },
+        {
+          "name": "CreatedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date the promotion was created"
+        },
+        {
+          "name": "ModifiedDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date the promotion was last modified"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_Promotion",
+        "columns": [
+          "PromotionID"
+        ]
+      },
+      "foreign_keys": [],
+      "indices": [],
+      "check_constraints": [
+        {
+          "name": "CK_Promotion_DiscountType",
+          "definition": "DiscountType IN ('Percentage', 'FixedAmount', 'FreeShipping')"
+        },
+        {
+          "name": "CK_Promotion_DiscountValue",
+          "definition": "DiscountValue >= 0"
+        },
+        {
+          "name": "CK_Promotion_Dates",
+          "definition": "StartDate <= EndDate OR EndDate IS NULL"
+        }
+      ],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store promotion details"
+    },
+    {
+      "name": "PromotionProduct",
+      "columns": [
+        {
+          "name": "PromotionProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the PromotionProduct table."
+        },
+        {
+          "name": "PromotionID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing Promotion table."
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing Product table."
+        }
+      ],
+      "primary_key": {
+        "name": "PK_PromotionProduct",
+        "columns": [
+          "PromotionProductID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_PromotionProduct_Promotion",
+          "columns": [
+            "PromotionID"
+          ],
+          "ref_table": "Promotion",
+          "ref_columns": [
+            "PromotionID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_PromotionProduct_Product",
+          "columns": [
+            "ProductID"
+          ],
+          "ref_table": "Product",
+          "ref_columns": [
+            "ProductID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table linking promotions to products with unique constraints."
+    },
+    {
+      "name": "PromotionCategory",
+      "columns": [
+        {
+          "name": "PromotionCategoryID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the PromotionCategory table"
+        },
+        {
+          "name": "PromotionID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing Promotion table"
+        },
+        {
+          "name": "CategoryID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing ProductCategory table"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_PromotionCategory",
+        "columns": [
+          "PromotionCategoryID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_PromotionCategory_Promotion",
+          "columns": [
+            "PromotionID"
+          ],
+          "ref_table": "Promotion",
+          "ref_columns": [
+            "PromotionID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_PromotionCategory_Category",
+          "columns": [
+            "CategoryID"
+          ],
+          "ref_table": "ProductCategory",
+          "ref_columns": [
+            "CategoryID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table linking promotions to product categories"
+    },
+    {
+      "name": "ShoppingCart",
+      "columns": [
+        {
+          "name": "CartID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the shopping cart"
+        },
+        {
+          "name": "UserID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "User ID associated with the cart, NULL for anonymous carts"
+        },
+        {
+          "name": "SessionID",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Session ID for anonymous users"
+        },
+        {
+          "name": "CurrencyID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Currency ID for the cart"
+        },
+        {
+          "name": "CreatedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the cart was created"
+        },
+        {
+          "name": "ModifiedDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the cart was last modified"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_ShoppingCart",
+        "columns": [
+          "CartID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_ShoppingCart_User",
+          "columns": [
+            "UserID"
+          ],
+          "ref_table": "User",
+          "ref_columns": [
+            "UserID"
+          ],
+          "on_delete": "SET NULL",
+          "on_update": null
+        },
+        {
+          "name": "FK_ShoppingCart_Currency",
+          "columns": [
+            "CurrencyID"
+          ],
+          "ref_table": "Currency",
+          "ref_columns": [
+            "CurrencyID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store shopping cart details"
+    },
+    {
+      "name": "ShoppingCartItem",
+      "columns": [
+        {
+          "name": "CartItemID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the shopping cart item"
+        },
+        {
+          "name": "CartID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the shopping cart"
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the product"
+        },
+        {
+          "name": "VariantID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the product variant"
+        },
+        {
+          "name": "Quantity",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Quantity of the product in the cart"
+        },
+        {
+          "name": "UnitPrice",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Price per unit of the product"
+        },
+        {
+          "name": "AddedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the item was added to the cart"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_ShoppingCartItem",
+        "columns": [
+          "CartItemID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_ShoppingCartItem_Cart",
+          "columns": [
+            "CartID"
+          ],
+          "ref_table": "ShoppingCart",
+          "ref_columns": [
+            "CartID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_ShoppingCartItem_Product",
+          "columns": [
+            "ProductID"
+          ],
+          "ref_table": "Product",
+          "ref_columns": [
+            "ProductID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_ShoppingCartItem_Variant",
+          "columns": [
+            "VariantID"
+          ],
+          "ref_table": "ProductVariant",
+          "ref_columns": [
+            "VariantID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [
+        {
+          "name": "CK_ShoppingCartItem_Quantity",
+          "definition": "Quantity > 0"
+        }
+      ],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table representing items in a shopping cart"
+    },
+    {
+      "name": "Order",
+      "columns": [
+        {
+          "name": "OrderID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the Order table"
+        },
+        {
+          "name": "UserID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key to User table, NULL for guest checkout"
+        },
+        {
+          "name": "OrderNumber",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 20,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Unique order number"
+        },
+        {
+          "name": "OrderDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the order was placed"
+        },
+        {
+          "name": "OrderStatusID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key to OrderStatus table"
+        },
+        {
+          "name": "CurrencyID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key to Currency table"
+        },
+        {
+          "name": "SubtotalAmount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Subtotal amount of the order"
+        },
+        {
+          "name": "ShippingAmount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Shipping cost for the order"
+        },
+        {
+          "name": "TaxAmount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Tax amount for the order"
+        },
+        {
+          "name": "DiscountAmount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Discount applied to the order"
+        },
+        {
+          "name": "TotalAmount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Total amount of the order"
+        },
+        {
+          "name": "PaymentMethodID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key to PaymentMethod table"
+        },
+        {
+          "name": "PaymentTransactionID",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Transaction ID for the payment"
+        },
+        {
+          "name": "ShippingMethodID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key to ShippingMethod table"
+        },
+        {
+          "name": "TrackingNumber",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Tracking number for the shipment"
+        },
+        {
+          "name": "BillingAddressID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "ID of the billing address"
+        },
+        {
+          "name": "ShippingAddressID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "ID of the shipping address"
+        },
+        {
+          "name": "CustomerNotes",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 1000,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Notes from the customer"
+        },
+        {
+          "name": "InternalNotes",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 1000,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Internal notes for the order"
+        },
+        {
+          "name": "IsGuestCheckout",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the order was placed by a guest"
+        },
+        {
+          "name": "IPAddress",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 45,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "IP address of the customer"
+        },
+        {
+          "name": "UserAgent",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 500,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "User agent string of the customer's browser"
+        },
+        {
+          "name": "CompletedDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the order was completed"
+        },
+        {
+          "name": "CancelledDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the order was cancelled"
+        },
+        {
+          "name": "CreatedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the order record was created"
+        },
+        {
+          "name": "ModifiedDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the order record was last modified"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_Order",
+        "columns": [
+          "OrderID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_Order_User",
+          "columns": [
+            "UserID"
+          ],
+          "ref_table": "User",
+          "ref_columns": [
+            "UserID"
+          ],
+          "on_delete": "SET NULL",
+          "on_update": null
+        },
+        {
+          "name": "FK_Order_OrderStatus",
+          "columns": [
+            "OrderStatusID"
+          ],
+          "ref_table": "OrderStatus",
+          "ref_columns": [
+            "OrderStatusID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_Order_Currency",
+          "columns": [
+            "CurrencyID"
+          ],
+          "ref_table": "Currency",
+          "ref_columns": [
+            "CurrencyID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_Order_PaymentMethod",
+          "columns": [
+            "PaymentMethodID"
+          ],
+          "ref_table": "PaymentMethod",
+          "ref_columns": [
+            "PaymentMethodID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_Order_ShippingMethod",
+          "columns": [
+            "ShippingMethodID"
+          ],
+          "ref_table": "ShippingMethod",
+          "ref_columns": [
+            "ShippingMethodID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store order details"
+    },
+    {
+      "name": "OrderItem",
+      "columns": [
+        {
+          "name": "OrderItemID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Unique identifier for each order item."
+        },
+        {
+          "name": "OrderID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Identifier for the order to which this item belongs."
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Identifier for the product."
+        },
+        {
+          "name": "VariantID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Identifier for the product variant, if applicable."
+        },
+        {
+          "name": "ProductName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 255,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the product at the time of order."
+        },
+        {
+          "name": "SKU",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Stock Keeping Unit of the product at the time of order."
+        },
+        {
+          "name": "Quantity",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Quantity of the product ordered."
+        },
+        {
+          "name": "UnitPrice",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Price per unit of the product at the time of order."
+        },
+        {
+          "name": "UnitCost",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Cost per unit of the product for profit reporting."
+        },
+        {
+          "name": "Discount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Discount applied to the product."
+        },
+        {
+          "name": "TaxAmount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Tax amount applied to the product."
+        },
+        {
+          "name": "TotalAmount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Total amount for the order item."
+        },
+        {
+          "name": "FulfillmentStatus",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 20,
+          "precision": null,
+          "scale": null,
+          "default_value": "'Pending'",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Status of the order item fulfillment."
+        }
+      ],
+      "primary_key": {
+        "name": "PK_OrderItem",
+        "columns": [
+          "OrderItemID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_OrderItem_Order",
+          "columns": [
+            "OrderID"
+          ],
+          "ref_table": "Order",
+          "ref_columns": [
+            "OrderID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_OrderItem_Product",
+          "columns": [
+            "ProductID"
+          ],
+          "ref_table": "Product",
+          "ref_columns": [
+            "ProductID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_OrderItem_Variant",
+          "columns": [
+            "VariantID"
+          ],
+          "ref_table": "ProductVariant",
+          "ref_columns": [
+            "VariantID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [
+        {
+          "name": "CK_OrderItem_Quantity",
+          "definition": "Quantity > 0"
+        },
+        {
+          "name": "CK_OrderItem_UnitPrice",
+          "definition": "UnitPrice >= 0"
+        },
+        {
+          "name": "CK_OrderItem_FulfillmentStatus",
+          "definition": "FulfillmentStatus IN ('Pending', 'Shipped', 'Delivered', 'Cancelled')"
+        }
+      ],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table storing items within an order, including product details and pricing at the time of order."
+    },
+    {
+      "name": "OrderHistory",
+      "columns": [
+        {
+          "name": "OrderHistoryID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the OrderHistory table."
+        },
+        {
+          "name": "OrderID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the Order table."
+        },
+        {
+          "name": "OrderStatusID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the OrderStatus table."
+        },
+        {
+          "name": "Notes",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 1000,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Optional notes about the order status change."
+        },
+        {
+          "name": "CreatedByUserID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the User table. Indicates who created the record."
+        },
+        {
+          "name": "CreatedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date and time when the record was created."
+        }
+      ],
+      "primary_key": {
+        "name": "PK_OrderHistory",
+        "columns": [
+          "OrderHistoryID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_OrderHistory_Order",
+          "columns": [
+            "OrderID"
+          ],
+          "ref_table": "Order",
+          "ref_columns": [
+            "OrderID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_OrderHistory_OrderStatus",
+          "columns": [
+            "OrderStatusID"
+          ],
+          "ref_table": "OrderStatus",
+          "ref_columns": [
+            "OrderStatusID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_OrderHistory_User",
+          "columns": [
+            "CreatedByUserID"
+          ],
+          "ref_table": "User",
+          "ref_columns": [
+            "UserID"
+          ],
+          "on_delete": "SET NULL",
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store the history of orders with status changes and notes."
+    },
+    {
+      "name": "OrderPromotion",
+      "columns": [
+        {
+          "name": "OrderPromotionID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the OrderPromotion table"
+        },
+        {
+          "name": "OrderID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing Order table"
+        },
+        {
+          "name": "PromotionID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing Promotion table"
+        },
+        {
+          "name": "DiscountAmount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "length": null,
+          "precision": 10,
+          "scale": 2,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Amount of discount applied"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_OrderPromotion",
+        "columns": [
+          "OrderPromotionID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_OrderPromotion_Order",
+          "columns": [
+            "OrderID"
+          ],
+          "ref_table": "Order",
+          "ref_columns": [
+            "OrderID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_OrderPromotion_Promotion",
+          "columns": [
+            "PromotionID"
+          ],
+          "ref_table": "Promotion",
+          "ref_columns": [
+            "PromotionID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store promotions applied to orders"
+    },
+    {
+      "name": "ShippingEvent",
+      "columns": [
+        {
+          "name": "ShippingEventID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Unique identifier for each shipping event."
+        },
+        {
+          "name": "OrderID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Identifier for the order associated with the shipping event."
+        },
+        {
+          "name": "EventType",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 50,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Type of event, e.g., 'Shipped', 'InTransit', 'OutForDelivery', 'Delivered', 'Exception'."
+        },
+        {
+          "name": "Location",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Location where the event occurred."
+        },
+        {
+          "name": "EventDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date and time when the event occurred."
+        },
+        {
+          "name": "TrackingNumber",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Tracking number associated with the shipping event."
+        },
+        {
+          "name": "Notes",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 500,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Additional notes about the shipping event."
+        },
+        {
+          "name": "CreatedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date and time when the record was created."
+        }
+      ],
+      "primary_key": {
+        "name": "PK_ShippingEvent",
+        "columns": [
+          "ShippingEventID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_ShippingEvent_Order",
+          "columns": [
+            "OrderID"
+          ],
+          "ref_table": "Order",
+          "ref_columns": [
+            "OrderID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store events related to the shipping process of orders."
+    },
+    {
+      "name": "WishList",
+      "columns": [
+        {
+          "name": "WishListID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the WishList table"
+        },
+        {
+          "name": "UserID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing User table"
+        },
+        {
+          "name": "WishListName",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Name of the wish list"
+        },
+        {
+          "name": "IsPublic",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "0",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the wish list is public"
+        },
+        {
+          "name": "CreatedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date the wish list was created"
+        },
+        {
+          "name": "ModifiedDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date the wish list was last modified"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_WishList",
+        "columns": [
+          "WishListID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_WishList_User",
+          "columns": [
+            "UserID"
+          ],
+          "ref_table": "User",
+          "ref_columns": [
+            "UserID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store user wish lists"
+    },
+    {
+      "name": "WishListItem",
+      "columns": [
+        {
+          "name": "WishListItemID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the wishlist item"
+        },
+        {
+          "name": "WishListID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the wishlist"
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the product"
+        },
+        {
+          "name": "VariantID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing the product variant"
+        },
+        {
+          "name": "AddedDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the item was added to the wishlist"
+        },
+        {
+          "name": "Notes",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 500,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Optional notes about the wishlist item"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_WishListItem",
+        "columns": [
+          "WishListItemID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_WishListItem_WishList",
+          "columns": [
+            "WishListID"
+          ],
+          "ref_table": "WishList",
+          "ref_columns": [
+            "WishID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_WishListItem_Product",
+          "columns": [
+            "ProductID"
+          ],
+          "ref_table": "Product",
+          "ref_columns": [
+            "ProductID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        },
+        {
+          "name": "FK_WishListItem_Variant",
+          "columns": [
+            "VariantID"
+          ],
+          "ref_table": "ProductVariant",
+          "ref_columns": [
+            "VariantID"
+          ],
+          "on_delete": null,
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store items in a wishlist"
+    },
+    {
+      "name": "ProductView",
+      "columns": [
+        {
+          "name": "ProductViewID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Primary key for the ProductView table"
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing Product table"
+        },
+        {
+          "name": "UserID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Foreign key referencing User table, NULL for anonymous users"
+        },
+        {
+          "name": "SessionID",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Session ID for anonymous users"
+        },
+        {
+          "name": "ViewDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date and time of the product view"
+        },
+        {
+          "name": "IPAddress",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 45,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "IP address of the user viewing the product"
+        },
+        {
+          "name": "UserAgent",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 500,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "User agent string of the browser"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_ProductView",
+        "columns": [
+          "ProductViewID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_ProductView_Product",
+          "columns": [
+            "ProductID"
+          ],
+          "ref_table": "Product",
+          "ref_columns": [
+            "ProductID"
+          ],
+          "on_delete": "CASCADE",
+          "on_update": null
+        },
+        {
+          "name": "FK_ProductView_User",
+          "columns": [
+            "UserID"
+          ],
+          "ref_table": "User",
+          "ref_columns": [
+            "UserID"
+          ],
+          "on_delete": "SET NULL",
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store product view information"
+    },
+    {
+      "name": "UserSearch",
+      "columns": [
+        {
+          "name": "SearchID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Unique identifier for each search"
+        },
+        {
+          "name": "UserID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Identifier for the user, NULL for anonymous users"
+        },
+        {
+          "name": "SessionID",
+          "data_type": "NVARCHAR",
+          "nullable": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Session identifier for anonymous users"
+        },
+        {
+          "name": "SearchTerm",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "The term searched by the user"
+        },
+        {
+          "name": "ResultCount",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Number of results returned for the search"
+        },
+        {
+          "name": "SearchDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date and time when the search was made"
+        }
+      ],
+      "primary_key": {
+        "name": "PK_UserSearch",
+        "columns": [
+          "SearchID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_UserSearch_User",
+          "columns": [
+            "UserID"
+          ],
+          "ref_table": "User",
+          "ref_columns": [
+            "UserID"
+          ],
+          "on_delete": "SET NULL",
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table to store user search data"
+    },
+    {
+      "name": "EmailSubscription",
+      "columns": [
+        {
+          "name": "SubscriptionID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": true,
+          "is_computed": false,
+          "description": "Unique identifier for each subscription."
+        },
+        {
+          "name": "UserID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Identifier for the user associated with the subscription."
+        },
+        {
+          "name": "Email",
+          "data_type": "NVARCHAR",
+          "nullable": false,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Email address of the subscriber."
+        },
+        {
+          "name": "IsSubscribed",
+          "data_type": "BIT",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "1",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Indicates if the user is currently subscribed."
+        },
+        {
+          "name": "SubscriptionDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": "GETDATE()",
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the subscription was created."
+        },
+        {
+          "name": "UnsubscriptionDate",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default_value": null,
+          "is_identity": false,
+          "is_computed": false,
+          "description": "Date when the subscription was cancelled."
+        }
+      ],
+      "primary_key": {
+        "name": "PK_EmailSubscription",
+        "columns": [
+          "SubscriptionID"
+        ]
+      },
+      "foreign_keys": [
+        {
+          "name": "FK_EmailSubscription_User",
+          "columns": [
+            "UserID"
+          ],
+          "ref_table": "User",
+          "ref_columns": [
+            "UserID"
+          ],
+          "on_delete": "SET NULL",
+          "on_update": null
+        }
+      ],
+      "indices": [],
+      "check_constraints": [],
+      "unique_constraints": [],
+      "default_constraints": [],
+      "reference_data": null,
+      "description": "Table for managing email subscriptions of users."
+    }
+  ],
+  "generation_rules": [],
+  "ir_version": "1.0.0",
+  "description": "SQL Server schema EcommerceDB"
+}

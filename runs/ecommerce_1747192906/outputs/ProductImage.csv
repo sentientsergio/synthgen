@@ -1,0 +1,11 @@
+ProductImageID,ProductID,ImageURL,ImageAlt,IsPrimary,DisplayOrder
+1,101,https://example.com/images/product101_1.jpg,Front view of product 101,True,1
+2,101,https://example.com/images/product101_2.jpg,Side view of product 101,False,2
+3,102,https://example.com/images/product102_1.jpg,Front view of product 102,True,1
+4,103,https://example.com/images/product103_1.jpg,Front view of product 103,True,1
+5,103,https://example.com/images/product103_2.jpg,Back view of product 103,False,2
+6,104,https://example.com/images/product104_1.jpg,Front view of product 104,True,1
+7,105,https://example.com/images/product105_1.jpg,Front view of product 105,True,1
+8,105,https://example.com/images/product105_2.jpg,Side view of product 105,False,2
+9,106,https://example.com/images/product106_1.jpg,Front view of product 106,True,1
+10,107,https://example.com/images/product107_1.jpg,Front view of product 107,True,1

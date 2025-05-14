@@ -1,0 +1,8 @@
+1,Credit Card,Payment using credit card,1,1
+2,Debit Card,Payment using debit card,1,2
+3,PayPal,Payment using PayPal account,1,3
+4,Apple Pay,Payment using Apple Pay,1,4
+5,Google Pay,Payment using Google Pay,1,5
+6,Bank Transfer,Direct bank transfer payment,1,6
+7,Cash on Delivery,Payment upon delivery,1,7
+8,Gift Card,Payment using gift card balance,1,8

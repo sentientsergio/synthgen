@@ -1,0 +1,10 @@
+1,101,john.doe@example.com,True,2023-01-15T10:30:00,None
+2,102,jane.smith@example.com,False,2023-02-20T14:45:00,2023-03-01T09:00:00
+3,103,alice.jones@example.com,True,2023-03-10T08:15:00,None
+4,104,bob.brown@example.com,True,2023-04-05T11:20:00,None
+5,105,carol.white@example.com,False,2023-05-12T13:50:00,2023-06-01T16:30:00
+6,106,dave.green@example.com,True,2023-06-18T17:05:00,None
+7,107,eve.black@example.com,True,2023-07-22T19:40:00,None
+8,108,frank.red@example.com,False,2023-08-30T07:25:00,2023-09-15T12:00:00
+9,109,grace.blue@example.com,True,2023-09-10T15:35:00,None
+10,110,henry.yellow@example.com,True,2023-10-01T18:45:00,None

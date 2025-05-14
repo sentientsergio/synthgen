@@ -1,0 +1,50 @@
+1,ELEC-0001,Apple iPhone 13,Latest model of the Apple iPhone series with advanced features.,2,1,799.99,10.0,7.5,0.174,5.78 x 2.82 x 0.30,50,10,True,True,False,2023-10-01T10:00:00,2023-10-10T15:00:00
+2,ELEC-0002,Samsung Galaxy S21,Samsung's flagship smartphone with high-end specifications.,2,2,699.99,5.0,7.5,0.169,5.97 x 2.80 x 0.31,75,15,True,True,False,2023-09-15T11:00:00,2023-10-05T14:00:00
+3,ELEC-0003,Sony WH-1000XM4 Headphones,Noise-cancelling over-ear headphones with superior sound quality.,1,5,349.99,15.0,7.5,0.254,7.27 x 3.03 x 9.94,30,5,True,True,False,2023-08-20T09:30:00,2023-09-25T13:30:00
+4,ELEC-0004,Dell XPS 13 Laptop,Compact and powerful laptop with a stunning display.,3,7,999.99,12.0,7.5,1.2,11.6 x 7.8 x 0.6,40,10,True,True,False,2023-07-10T12:00:00,2023-09-15T16:00:00
+5,ELEC-0005,HP Spectre x360,Versatile 2-in-1 laptop with a sleek design.,3,8,1099.99,8.0,7.5,1.3,12.1 x 8.6 x 0.7,20,5,True,True,False,2023-06-05T13:00:00,2023-08-20T11:00:00
+6,CLO-0001,Nike Air Max 270,Stylish and comfortable sneakers for everyday wear.,7,3,150.0,20.0,7.5,0.5,12 x 8 x 4,100,20,True,True,False,2023-05-01T14:00:00,2023-07-15T10:00:00
+7,CLO-0002,Adidas Ultraboost,High-performance running shoes with superior cushioning.,7,4,180.0,15.0,7.5,0.6,11 x 7 x 5,80,15,True,True,False,2023-04-10T15:00:00,2023-06-20T12:00:00
+8,HOME-0001,IKEA Billy Bookcase,Classic bookcase with adjustable shelves.,11,10,59.99,5.0,7.5,15.0,31.5 x 11 x 79.5,25,5,True,True,False,2023-03-05T16:00:00,2023-05-10T14:00:00
+9,HOME-0002,Amazon Basics Microwave,Compact microwave with Alexa integration.,10,9,49.99,10.0,7.5,10.0,17.3 x 10.1 x 14.1,60,10,True,True,False,2023-02-15T10:00:00,2023-04-05T13:00:00
+10,ELEC-0006,LG OLED TV,High-definition OLED TV with stunning picture quality.,1,6,1299.99,10.0,7.5,18.0,48.3 x 27.8 x 1.8,15,5,True,True,False,2023-01-10T09:00:00,2023-03-15T11:00:00
+11,CLO-0003,Women's Summer Dress,Lightweight and breathable summer dress.,8,None,39.99,5.0,7.5,0.3,N/A,200,30,True,True,False,2023-01-01T12:00:00,2023-02-20T15:00:00
+12,CLO-0004,Men's Winter Jacket,Warm and stylish jacket for cold weather.,7,None,89.99,10.0,7.5,1.5,N/A,150,25,True,True,False,2022-12-15T14:00:00,2023-01-30T10:00:00
+13,ELEC-0007,Apple MacBook Air,Lightweight and powerful laptop with M1 chip.,3,1,999.99,8.0,7.5,1.29,11.97 x 8.36 x 0.63,35,10,True,True,False,2022-11-20T11:00:00,2023-01-10T13:00:00
+14,ELEC-0008,Samsung QLED TV,Smart TV with vibrant QLED display.,1,2,1199.99,12.0,7.5,20.0,57.1 x 32.7 x 2.4,20,5,True,True,False,2022-10-15T09:00:00,2022-12-25T11:00:00
+15,HOME-0003,IKEA Malm Bed Frame,Sturdy bed frame with a clean design.,11,10,199.99,5.0,7.5,30.0,83.5 x 64.1 x 30.7,10,3,True,True,False,2022-09-05T16:00:00,2022-11-10T14:00:00
+16,HOME-0004,Amazon Basics Office Chair,Comfortable office chair with adjustable height.,10,9,89.99,10.0,7.5,12.0,25.2 x 24 x 34.8,50,10,True,True,False,2022-08-15T10:00:00,2022-10-05T13:00:00
+17,ELEC-0009,LG Soundbar,High-quality soundbar with wireless subwoofer.,1,6,299.99,15.0,7.5,5.0,35.0 x 2.2 x 3.4,30,5,True,True,False,2022-07-10T12:00:00,2022-09-15T16:00:00
+18,CLO-0005,Children's Winter Coat,Warm coat for children, perfect for winter.,9,None,49.99,5.0,7.5,0.8,N/A,100,20,True,True,False,2022-06-01T14:00:00,2022-08-15T10:00:00
+19,CLO-0006,Women's Yoga Pants,Comfortable and flexible yoga pants for women.,8,None,29.99,10.0,7.5,0.2,N/A,150,25,True,True,False,2022-05-10T15:00:00,2022-07-20T12:00:00
+20,ELEC-0010,Sony PlayStation 5,Next-generation gaming console with immersive gameplay.,1,5,499.99,0.0,7.5,4.5,15.4 x 10.2 x 4.1,25,5,True,True,False,2022-04-01T09:00:00,2022-06-15T11:00:00
+1,SKU_1,ProductName_1,Description_1,1,1,1,1,1,1,Dimensions_1,1,1,False,False,False,2023-02-02,2023-02-02
+2,SKU_2,ProductName_2,Description_2,2,2,2,2,2,2,Dimensions_2,2,2,True,True,True,2023-03-03,2023-03-03
+3,SKU_3,ProductName_3,Description_3,3,3,3,3,3,3,Dimensions_3,3,3,False,False,False,2023-04-04,2023-04-04
+4,SKU_4,ProductName_4,Description_4,4,4,4,4,4,4,Dimensions_4,4,4,True,True,True,2023-05-05,2023-05-05
+5,SKU_5,ProductName_5,Description_5,5,5,5,5,5,5,Dimensions_5,5,5,False,False,False,2023-06-06,2023-06-06
+6,SKU_6,ProductName_6,Description_6,6,6,6,6,6,6,Dimensions_6,6,6,True,True,True,2023-07-07,2023-07-07
+7,SKU_7,ProductName_7,Description_7,7,7,7,7,7,7,Dimensions_7,7,7,False,False,False,2023-08-08,2023-08-08
+8,SKU_8,ProductName_8,Description_8,8,8,8,8,8,8,Dimensions_8,8,8,True,True,True,2023-09-09,2023-09-09
+9,SKU_9,ProductName_9,Description_9,9,9,9,9,9,9,Dimensions_9,9,9,False,False,False,2023-10-10,2023-10-10
+10,SKU_10,ProductName_10,Description_10,10,10,10,10,10,10,Dimensions_10,10,10,True,True,True,2023-11-11,2023-11-11
+0,SKU_1tg,Produdc,Descr433,10,14,0.8374780959446371,0.8930643573562959,1.040807491619992,1.0244980251754452,Dimen160,0,0,False,False,False,2023-02-02,2023-02-02
+23,CLO-0297,Adidacw,High-pu,2,11,214.06433500651468,14.27120626325012,7.65612189381968,0.6790571194207187,11 x qw,82,16,True,True,False,2023-04-10T15:00:00,2023-06-20T12:00:00
+21,ELEC-qj,Applejf,Light68,2,4,868.446774724646,8.733205753441117,6.490207481285785,1.2277990079469463,11.97966,35,10,True,True,False,2022-11-20T11:00:00,2023-01-10T13:00:00
+22,CLO-0113,Women164,Comfolg,3,14,30.726172137421152,9.050966434091741,7.753757970670622,0.23182583068819815,N/Akf66,179,25,True,True,False,2022-05-10T15:00:00,2022-07-20T12:00:00
+27,ELEC-935,Apple641,Light655,19,14,906.7210086802573,8.451077755455385,6.334656520787629,1.2563388693452582,11.97ly,40,9,True,True,False,2022-11-20T11:00:00,2023-01-10T13:00:00
+34,CLO-0to,Adida676,High-563,3,14,207.26797520326926,16.989993176167076,6.922542376207985,0.49390203995860504,11 x 541,66,14,True,True,False,2023-04-10T15:00:00,2023-06-20T12:00:00
+29,SKU_833,Produtr,Descr244,2,4,9.278765070857425,7.8447556524516155,7.193297963731226,6.604882868244304,Dimen498,8,6,True,True,True,2023-09-09,2023-09-09
+28,CLO-0550,Adida433,High-474,4,4,169.50942479444788,14.466613656298428,8.59151024510881,0.4930010849357209,11 x 946,65,16,True,True,False,2023-04-10T15:00:00,2023-06-20T12:00:00
+30,ELEC-981,Sony bz,Noisevz,17,5,303.27489024010555,14.91384675270431,6.641241897597545,0.24394569372302438,7.27 bj,35,4,True,True,False,2023-08-20T09:30:00,2023-09-25T13:30:00
+41,HOME-609,Amazo84,Comfo598,4,10,102.68650523417008,8.629730911757933,8.88233670982335,9.984535033154817,25.2 ep,53,8,True,True,False,2022-08-15T10:00:00,2022-10-05T13:00:00
+1,ELEC-0001,Apple iPhone 13,Latest model of the Apple iPhone series with advanced features.,2,1,799.99,10.0,7.5,0.174,14.7 x 7.1 x 0.8 cm,150,20,True,True,False,2023-10-01T10:00:00,2023-10-05T12:00:00
+2,ELEC-0002,Samsung Galaxy S21,Samsung's flagship smartphone with high-end specifications.,2,2,699.99,15.0,7.5,0.169,15.1 x 7.1 x 0.8 cm,200,30,True,True,False,2023-09-15T09:30:00,2023-10-02T11:00:00
+3,ELEC-0003,Dell XPS 13 Laptop,Compact and powerful laptop with a stunning display.,3,7,999.99,5.0,7.5,1.2,30.2 x 19.9 x 1.5 cm,50,10,True,True,False,2023-08-20T14:00:00,2023-09-25T15:30:00
+4,ELEC-0004,Sony WH-1000XM4 Headphones,Noise-canceling over-ear headphones with superior sound quality.,1,5,349.99,20.0,7.5,0.254,18.5 x 15.5 x 7.5 cm,120,25,True,True,False,2023-07-10T08:45:00,2023-09-10T10:15:00
+5,ELEC-0005,HP Envy Printer,All-in-one printer with wireless printing capabilities.,1,8,199.99,10.0,7.5,5.5,45.0 x 36.0 x 12.0 cm,80,15,True,True,False,2023-06-05T11:00:00,2023-08-15T13:00:00
+6,CLOTH-0001,Nike Air Max Sneakers,Comfortable and stylish sneakers for everyday wear.,7,3,129.99,25.0,7.5,0.85,30.0 x 20.0 x 10.0 cm,300,50,True,True,False,2023-05-01T14:30:00,2023-07-20T16:00:00
+7,CLOTH-0002,Adidas Running Shorts,Lightweight and breathable shorts for running.,7,4,39.99,15.0,7.5,0.15,20.0 x 15.0 x 2.0 cm,250,40,True,True,False,2023-04-15T09:00:00,2023-06-25T11:30:00
+8,HOME-0001,IKEA Dining Table,Modern dining table with a sleek design.,11,10,299.99,10.0,7.5,25.0,150.0 x 90.0 x 75.0 cm,30,5,True,True,False,2023-03-10T10:00:00,2023-05-15T12:00:00
+9,HOME-0002,Amazon Basics Microwave,Compact microwave oven with easy-to-use controls.,10,9,89.99,5.0,7.5,12.0,45.0 x 35.0 x 25.0 cm,100,20,True,True,False,2023-02-05T08:00:00,2023-04-10T09:30:00
+10,ELEC-0006,LG OLED TV,High-definition OLED TV with stunning picture quality.,1,6,1499.99,20.0,7.5,18.0,122.0 x 71.0 x 5.0 cm,40,10,True,True,False,2023-01-01T12:00:00,2023-03-15T14:00:00

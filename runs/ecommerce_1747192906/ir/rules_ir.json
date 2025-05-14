@@ -1,0 +1,256 @@
+{
+  "schemaName": "EcommerceDB",
+  "rules": [
+    {
+      "rule_id": "user_email_pattern",
+      "rule_type": "value_pattern",
+      "target": "User.Email",
+      "definition": {
+        "pattern": "${FirstName}.${LastName}@example.com",
+        "lowercase": true,
+        "alternatives": [
+          "${FirstName[0]}.${LastName}@example.com",
+          "${FirstName}.${LastName[0]}@example.com",
+          "${FirstName}${LastName[0:2]}@gmail.com",
+          "${FirstName}${LastName}@outlook.com",
+          "${FirstName}_${LastName}@yahoo.com"
+        ],
+        "alternative_probability": 0.7
+      },
+      "description": "Generate realistic email addresses based on user names with domain variety"
+    },
+    {
+      "rule_id": "product_price_by_category",
+      "rule_type": "conditional",
+      "target": "Product.BasePrice",
+      "definition": {
+        "conditions": [
+          {
+            "column": "CategoryID",
+            "operator": "=",
+            "value": 1,
+            "description": "Electronics are expensive",
+            "price_range": "high",
+            "examples": [
+              199.99,
+              299.99,
+              499.99,
+              799.99,
+              1299.99
+            ]
+          },
+          {
+            "column": "CategoryID",
+            "operator": "=",
+            "value": 6,
+            "description": "Clothing is mid-range",
+            "price_range": "medium",
+            "examples": [
+              19.99,
+              29.99,
+              39.99,
+              49.99,
+              59.99
+            ]
+          },
+          {
+            "column": "CategoryID",
+            "operator": "=",
+            "value": 10,
+            "description": "Home & Kitchen varies widely",
+            "price_range": "medium-high",
+            "examples": [
+              29.99,
+              49.99,
+              99.99,
+              199.99,
+              299.99
+            ]
+          },
+          {
+            "column": "CategoryID",
+            "operator": "=",
+            "value": 14,
+            "description": "Books are lower priced",
+            "price_range": "low",
+            "examples": [
+              9.99,
+              12.99,
+              14.99,
+              19.99,
+              24.99
+            ]
+          },
+          {
+            "column": "CategoryID",
+            "operator": "=",
+            "value": 18,
+            "description": "Beauty & Personal Care is mid-range",
+            "price_range": "medium",
+            "examples": [
+              7.99,
+              12.99,
+              19.99,
+              29.99,
+              39.99
+            ]
+          }
+        ]
+      },
+      "description": "Different product categories have different price ranges (books cheaper, electronics more expensive)"
+    },
+    {
+      "rule_id": "simplified_order_patterns",
+      "rule_type": "conceptual",
+      "target": "Order.OrderDate",
+      "definition": {
+        "patterns": [
+          "Orders are more frequent on weekends than weekdays",
+          "Evening hours (6pm-10pm) see more orders than business hours",
+          "Major shopping periods include Black Friday weekend (late November)",
+          "Holiday shopping peaks in December, especially Dec 10-20",
+          "Valentine's Day (Feb 14) sees increased gift purchases",
+          "Cyber Monday (Monday after Thanksgiving) has high online order volume",
+          "Weekday mornings have the lowest order volume",
+          "Sunday evenings have higher order volumes than other weekday evenings"
+        ]
+      },
+      "description": "Orders follow typical e-commerce patterns with higher volumes during evenings, weekends, and holiday periods"
+    },
+    {
+      "rule_id": "inventory_patterns",
+      "rule_type": "conceptual",
+      "target": "Product.InventoryCount",
+      "definition": {
+        "patterns": [
+          "Most products have inventory between 50-150 units",
+          "Popular products may have higher inventory levels (150-300)",
+          "Some products (about 5%) are out of stock (inventory = 0)",
+          "Seasonal items fluctuate in inventory based on season",
+          "New products typically start with higher inventory (100-200)",
+          "Products on clearance often have low inventory (1-20)"
+        ]
+      },
+      "description": "Inventory levels follow reasonable retail patterns with occasional stockouts"
+    },
+    {
+      "rule_id": "product_rating_patterns",
+      "rule_type": "conceptual",
+      "target": "ProductReview.Rating",
+      "definition": {
+        "patterns": [
+          "5-star ratings are most common (about 40-50% of all ratings)",
+          "4-star ratings are second most common (about 25-35%)",
+          "3-star ratings are moderate (about 10-15%)",
+          "2-star ratings are uncommon (about 5-10%)",
+          "1-star ratings are least common but still present (about 5%)",
+          "Heavily discounted products tend to have slightly lower average ratings",
+          "Electronics tend to have more polarized ratings (more 5-star and 1-star)"
+        ],
+        "general_distribution": "Positively skewed (higher ratings more common than lower)"
+      },
+      "description": "Product ratings follow typical e-commerce patterns with positive skew"
+    },
+    {
+      "rule_id": "related_products_purchase",
+      "rule_type": "relationship",
+      "target": "OrderItem",
+      "definition": {
+        "relationships": [
+          {
+            "if_category": 2,
+            "then_likely_categories": [
+              5
+            ],
+            "description": "Smartphone purchases often include audio accessories"
+          },
+          {
+            "if_category": 3,
+            "then_likely_categories": [
+              5
+            ],
+            "description": "Laptop purchases often include audio accessories"
+          },
+          {
+            "if_category": 7,
+            "then_likely_categories": [
+              9
+            ],
+            "description": "Men's clothing often purchased with children's clothing"
+          },
+          {
+            "if_category": 11,
+            "then_likely_categories": [
+              12,
+              13
+            ],
+            "description": "Furniture purchases often include kitchen items and bedding"
+          },
+          {
+            "if_category": 19,
+            "then_likely_categories": [
+              20,
+              21
+            ],
+            "description": "Skincare purchases often include hair care and makeup"
+          }
+        ],
+        "specific_examples": [
+          "When customers buy smartphones, they often buy headphones or cases",
+          "When customers buy laptops, they often buy laptop bags or wireless mice",
+          "When customers buy beds or mattresses, they often buy bedding sets",
+          "When customers buy skin moisturizers, they often buy cleansers"
+        ]
+      },
+      "description": "Related products are often purchased together based on logical product relationships"
+    },
+    {
+      "rule_id": "shopping_behavior_patterns",
+      "rule_type": "conceptual",
+      "target": "User.ShoppingBehavior",
+      "definition": {
+        "user_segments": [
+          {
+            "segment": "Frequent Shoppers",
+            "description": "Order approximately every 2-3 weeks, account for about 15% of user base",
+            "characteristics": "Higher average order value, more likely to use promotions, often purchase across multiple categories"
+          },
+          {
+            "segment": "Regular Shoppers",
+            "description": "Order approximately every 1-2 months, account for about 55% of user base",
+            "characteristics": "Medium order value, occasionally use promotions, tend to shop in 2-3 primary categories"
+          },
+          {
+            "segment": "Occasional Shoppers",
+            "description": "Order approximately every 3-6 months, account for about 30% of user base",
+            "characteristics": "Lower average order value, rarely use promotions, often shop in only 1 category"
+          }
+        ],
+        "general_patterns": [
+          "New users typically make smaller first purchases",
+          "Long-time users show more category diversity in purchases",
+          "About 10% of users become inactive after initial purchases",
+          "Users who purchase using promotions are more likely to return sooner"
+        ]
+      },
+      "description": "Users exhibit different shopping patterns based on their engagement level"
+    },
+    {
+      "rule_id": "promotional_usage_concepts",
+      "rule_type": "conceptual",
+      "target": "OrderPromotion",
+      "definition": {
+        "concepts": [
+          "About 30% of all orders use a promotion code",
+          "Orders over $100 are more likely to use promotions",
+          "Holiday periods see increased promotion usage",
+          "Repeat customers are more likely to use promotions than first-time buyers",
+          "Orders with many items (3+) more frequently use promotions",
+          "Some promotions are more popular than others (e.g., free shipping, 10% off)",
+          "Customers who haven't ordered in a while are targeted with better promotions"
+        ]
+      },
+      "description": "Promotional code usage follows logical patterns based on order and customer characteristics"
+    }
+  ]
+}

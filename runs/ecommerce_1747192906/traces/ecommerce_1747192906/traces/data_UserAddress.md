@@ -1,0 +1,10 @@
+1,101,Billing,True,John,Doe,123 Main St,Apt 4B,New York,5,10001,1,+1-212-555-0101
+2,102,Shipping,False,Jane,Smith,456 Elm St,None,Los Angeles,5,90001,1,+1-310-555-0202
+3,103,Billing,True,Michael,Johnson,789 Maple Ave,Suite 100,Chicago,6,60601,1,+1-312-555-0303
+4,104,Shipping,False,Emily,Davis,321 Oak St,None,Houston,4,77001,1,+1-713-555-0404
+5,105,Billing,True,David,Martinez,654 Pine St,Floor 2,Phoenix,3,85001,1,+1-602-555-0505
+6,106,Shipping,False,Sophia,Garcia,987 Cedar St,None,Philadelphia,7,19101,1,+1-215-555-0606
+7,107,Billing,True,James,Rodriguez,159 Spruce St,Unit 3,San Antonio,4,78201,1,+1-210-555-0707
+8,108,Shipping,False,Olivia,Hernandez,753 Birch St,None,San Diego,5,92101,1,+1-619-555-0808
+9,109,Billing,True,William,Lopez,357 Redwood St,Building 5,Dallas,4,75201,1,+1-214-555-0909
+10,110,Shipping,False,Ava,Gonzalez,951 Willow St,None,San Jose,5,95101,1,+1-408-555-1010

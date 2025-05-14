@@ -1,0 +1,19 @@
+1,NULL,Electronics,Electronic devices and accessories,1,1
+2,1,Smartphones,Mobile phones and accessories,1,1
+3,1,Laptops,Laptop computers and accessories,1,2
+4,1,Tablets,Tablet devices and accessories,1,3
+6,NULL,Clothing,Apparel and fashion items,1,2
+7,6,Men's Clothing,Clothing for men,1,1
+8,6,Women's Clothing,Clothing for women,1,2
+9,6,Children's Clothing,Clothing for children,1,3
+10,NULL,Home & Kitchen,Home and kitchen products,1,3
+11,10,Furniture,Household furniture,1,1
+12,10,Kitchen Appliances,Appliances for the kitchen,1,2
+14,NULL,Books,Books and publications,1,4
+15,14,Fiction,Fiction books,1,1
+16,14,Non-Fiction,Non-fiction books,1,2
+17,14,Educational,Educational and textbooks,1,3
+18,NULL,Beauty & Personal Care,Beauty and personal care products,1,5
+19,18,Skincare,Skincare products,1,1
+20,18,Haircare,Hair care products,1,2
+21,18,Makeup,Makeup and cosmetics,1,3

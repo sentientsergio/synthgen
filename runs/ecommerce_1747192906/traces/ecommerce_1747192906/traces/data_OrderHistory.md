@@ -1,0 +1,10 @@
+1,101,1,Order received and pending processing.,10,2023-10-01T09:15:00
+2,102,2,Order is currently being processed.,11,2023-10-02T10:30:00
+3,103,3,Order has been shipped via standard delivery.,12,2023-10-03T11:45:00
+4,104,4,Order delivered successfully.,13,2023-10-04T12:00:00
+5,105,5,Order was cancelled by the customer.,14,2023-10-05T13:15:00
+6,106,6,Refund processed for the cancelled order.,15,2023-10-06T14:30:00
+7,107,7,Order on hold due to inventory issues.,16,2023-10-07T15:45:00
+8,108,8,Order backordered, awaiting new stock.,17,2023-10-08T16:00:00
+9,109,9,Order completed and closed.,18,2023-10-09T17:15:00
+10,110,1,Order placed, awaiting processing.,19,2023-10-10T18:30:00

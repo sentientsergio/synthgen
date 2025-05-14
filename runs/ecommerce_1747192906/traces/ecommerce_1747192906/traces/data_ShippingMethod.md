@@ -1,0 +1,7 @@
+1,Standard Shipping,Regular shipping option,5.99,5,1,1
+2,Express Shipping,Faster delivery option,12.99,2,1,2
+3,Next Day Delivery,Delivery by the next business day,19.99,1,1,3
+4,Store Pickup,Collect your order from our store,0.00,1,1,4
+5,International Standard,Standard international shipping,15.99,10,1,5
+6,International Express,Express international shipping,29.99,4,1,6
+7,Free Shipping,Free shipping on qualifying orders,0.00,7,1,7

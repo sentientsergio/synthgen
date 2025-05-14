@@ -1,0 +1,7 @@
+UserRoleID,RoleName,Description,IsActive
+1,Customer,Regular customer account,1
+2,Admin,Administrative user with full access,1
+3,Manager,Store manager with limited administrative access,1
+4,Support,Customer support representative,1
+5,Vendor,Third-party vendor or supplier,1
+6,Affiliate,Affiliate marketer,1

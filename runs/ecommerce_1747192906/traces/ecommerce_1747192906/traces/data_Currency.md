@@ -1,0 +1,8 @@
+1,USD,US Dollar,$,1.000000,1,1
+2,EUR,Euro,€,0.850000,0,1
+3,GBP,British Pound,£,0.750000,0,1
+4,CAD,Canadian Dollar,$,1.270000,0,1
+5,AUD,Australian Dollar,$,1.350000,0,1
+6,JPY,Japanese Yen,¥,110.000000,0,1
+7,CNY,Chinese Yuan,¥,6.450000,0,1
+8,INR,Indian Rupee,₹,74.500000,0,1
