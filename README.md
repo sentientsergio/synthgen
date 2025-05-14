@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="img/synthgen.png" alt="SynthGen Banner" width="100%">
+</p>
+
 # SynthGen
 
 SynthGen creates **realistic, constraint‑valid synthetic data** for SQL Server schemas so that teams can develop, test, and demonstrate solutions without exposing production data.
@@ -24,6 +28,29 @@ The demo demonstrates how SynthGen can:
 - Create coherent relationships between entities
 
 [View the E-commerce Demo Documentation](demo.md) for a step-by-step walkthrough of the process, including descriptions of all input and output files.
+
+## Requirements Specification
+
+The [Requirements Specification](requirements.md) document provides a detailed overview of SynthGen's purpose, scope, and functionality. It includes:
+
+- Comprehensive user stories from various stakeholder perspectives
+- Functional and non-functional requirements
+- Acceptance criteria and performance benchmarks
+- Scope boundaries and future enhancements
+
+This document serves as the foundation for SynthGen's development and helps ensure all critical features are implemented correctly.
+
+## System Design
+
+The [High-Level Design](design.md) document outlines SynthGen's technical architecture and implementation approach. Key sections include:
+
+- Component diagram showing the agent pipeline
+- Intermediate Representation (IR) JSON schema
+- Prompt engineering standards
+- Artifact directory structure
+- Performance targets and extensibility points
+
+The design document provides developers with a clear roadmap for implementation while maintaining flexibility for future enhancements.
 
 ## Data Flow Diagram
 
