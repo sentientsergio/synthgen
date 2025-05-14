@@ -1,0 +1,140 @@
+# [dbo.Country]
+CountryID,CountryCode,CountryName,PhonePrefix,IsSupported
+1,US,United States,+1,1
+2,CA,Canada,+1,1
+3,GB,United Kingdom,+44,1
+4,AU,Australia,+61,1
+5,DE,Germany,+49,1
+6,FR,France,+33,1
+7,JP,Japan,+81,1
+8,CN,China,+86,1
+9,IN,India,+91,1
+10,IT,Italy,+39,1
+
+# [dbo.StateProvince]
+StateProvinceID,CountryID,StateCode,StateName
+1,1,AL,Alabama
+2,1,AK,Alaska
+3,1,AZ,Arizona
+4,1,AR,Arkansas
+5,1,CA,California
+6,1,CO,Colorado
+7,1,CT,Connecticut
+8,1,DE,Delaware
+9,1,FL,Florida
+10,1,GA,Georgia
+11,2,AB,Alberta
+12,2,BC,British Columbia
+13,2,MB,Manitoba
+14,2,NB,New Brunswick
+15,2,NL,Newfoundland and Labrador
+16,3,ENG,England
+17,3,SCT,Scotland
+18,3,WLS,Wales
+19,3,NIR,Northern Ireland
+20,5,BW,Baden-Württemberg
+21,5,BY,Bavaria
+22,5,BE,Berlin
+
+# [dbo.Currency]
+CurrencyID,CurrencyCode,CurrencyName,CurrencySymbol,ExchangeRate,IsDefault,IsSupported
+1,USD,US Dollar,$,1.000000,1,1
+2,EUR,Euro,€,0.850000,0,1
+3,GBP,British Pound,£,0.750000,0,1
+4,CAD,Canadian Dollar,$,1.270000,0,1
+5,AUD,Australian Dollar,$,1.350000,0,1
+6,JPY,Japanese Yen,¥,110.000000,0,1
+7,CNY,Chinese Yuan,¥,6.450000,0,1
+8,INR,Indian Rupee,₹,74.500000,0,1
+
+# [dbo.PaymentMethod]
+PaymentMethodID,PaymentMethodName,Description,IsActive,DisplayOrder
+1,Credit Card,Payment using credit card,1,1
+2,Debit Card,Payment using debit card,1,2
+3,PayPal,Payment using PayPal account,1,3
+4,Apple Pay,Payment using Apple Pay,1,4
+5,Google Pay,Payment using Google Pay,1,5
+6,Bank Transfer,Direct bank transfer payment,1,6
+7,Cash on Delivery,Payment upon delivery,1,7
+8,Gift Card,Payment using gift card balance,1,8
+
+# [dbo.ShippingMethod]
+ShippingMethodID,ShippingMethodName,Description,BasePrice,EstimatedDays,IsActive,DisplayOrder
+1,Standard Shipping,Regular shipping option,5.99,5,1,1
+2,Express Shipping,Faster delivery option,12.99,2,1,2
+3,Next Day Delivery,Delivery by the next business day,19.99,1,1,3
+4,Store Pickup,Collect your order from our store,0.00,1,1,4
+5,International Standard,Standard international shipping,15.99,10,1,5
+6,International Express,Express international shipping,29.99,4,1,6
+7,Free Shipping,Free shipping on qualifying orders,0.00,7,1,7
+
+# [dbo.OrderStatus]
+OrderStatusID,StatusName,Description,IsActive,DisplayOrder
+1,Pending,Order has been placed but not yet processed,1,1
+2,Processing,Order is being processed,1,2
+3,Shipped,Order has been shipped,1,3
+4,Delivered,Order has been delivered,1,4
+5,Cancelled,Order has been cancelled,1,5
+6,Refunded,Order has been refunded,1,6
+7,On Hold,Order is on hold due to payment or inventory issues,1,7
+8,Backordered,Order is waiting for inventory,1,8
+9,Completed,Order has been completed successfully,1,9
+
+# [dbo.UserStatus]
+UserStatusID,StatusName,Description,IsActive
+1,Active,User account is active and usable,1
+2,Inactive,User account is temporarily disabled,1
+3,Suspended,User account has been suspended due to policy violations,1
+4,Pending Verification,User account is waiting for email verification,1
+5,Locked,User account is locked due to multiple failed login attempts,1
+
+# [dbo.UserRole]
+UserRoleID,RoleName,Description,IsActive
+1,Customer,Regular customer account,1
+2,Admin,Administrative user with full access,1
+3,Manager,Store manager with limited administrative access,1
+4,Support,Customer support representative,1
+5,Vendor,Third-party vendor or supplier,1
+6,Affiliate,Affiliate marketer,1
+
+# [dbo.ProductCategory]
+CategoryID,ParentCategoryID,CategoryName,Description,IsActive,DisplayOrder
+1,NULL,Electronics,Electronic devices and accessories,1,1
+2,1,Smartphones,Mobile phones and accessories,1,1
+3,1,Laptops,Laptop computers and accessories,1,2
+4,1,Tablets,Tablet devices and accessories,1,3
+5,1,Audio,Headphones, speakers and audio equipment,1,4
+6,NULL,Clothing,Apparel and fashion items,1,2
+7,6,Men's Clothing,Clothing for men,1,1
+8,6,Women's Clothing,Clothing for women,1,2
+9,6,Children's Clothing,Clothing for children,1,3
+10,NULL,Home & Kitchen,Home and kitchen products,1,3
+11,10,Furniture,Household furniture,1,1
+12,10,Kitchen Appliances,Appliances for the kitchen,1,2
+13,10,Bedding,Bed sheets, pillows and related items,1,3
+14,NULL,Books,Books and publications,1,4
+15,14,Fiction,Fiction books,1,1
+16,14,Non-Fiction,Non-fiction books,1,2
+17,14,Educational,Educational and textbooks,1,3
+18,NULL,Beauty & Personal Care,Beauty and personal care products,1,5
+19,18,Skincare,Skincare products,1,1
+20,18,Haircare,Hair care products,1,2
+21,18,Makeup,Makeup and cosmetics,1,3
+
+# [dbo.ProductBrand]
+BrandID,BrandName,Description,Website,IsActive
+1,Apple,Consumer electronics and software,https://www.apple.com,1
+2,Samsung,Electronics and appliances manufacturer,https://www.samsung.com,1
+3,Nike,Athletic footwear and apparel,https://www.nike.com,1
+4,Adidas,Sports clothing and accessories,https://www.adidas.com,1
+5,Sony,Electronics and entertainment products,https://www.sony.com,1
+6,LG,Electronics and home appliances,https://www.lg.com,1
+7,Dell,Computer hardware and software,https://www.dell.com,1
+8,HP,Computers and printing solutions,https://www.hp.com,1
+9,Amazon Basics,Basic home and office products,https://www.amazon.com,1
+10,IKEA,Home furnishing products,https://www.ikea.com,1
+11,Logitech,Computer peripherals and accessories,https://www.logitech.com,1
+12,Levi's,Clothing, particularly jeans,https://www.levi.com,1
+13,H&M,Fashion and quality clothing,https://www.hm.com,1
+14,Zara,Trendy clothing and accessories,https://www.zara.com,1
+15,Philips,Healthcare, lighting and consumer electronics,https://www.philips.com,1 

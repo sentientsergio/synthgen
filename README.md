@@ -12,6 +12,19 @@ SynthGen orchestrates a **team of LLM‑centric agents** supported by lightweigh
 4. **Validator**: Ensures the generated data meets all constraints
 5. **Artifact Collector**: Organizes outputs and debug information
 
+## E-commerce Demo
+
+SynthGen includes a comprehensive **e-commerce demo** that showcases the system's capabilities. This demo generates a complete synthetic e-commerce dataset with users, products, orders, reviews, and more, based on a 30+ table schema with rich relationships.
+
+The demo demonstrates how SynthGen can:
+
+- Parse complex SQL schemas with many tables and relationships
+- Respect primary and foreign key constraints
+- Generate realistic data that follows business rules
+- Create coherent relationships between entities
+
+[View the E-commerce Demo Documentation](demo.md) for a step-by-step walkthrough of the process, including descriptions of all input and output files.
+
 ## Data Flow Diagram
 
 ```mermaid

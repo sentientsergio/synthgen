@@ -316,20 +316,46 @@ class DataSynthAgent(Agent):
         Returns:
             List of dictionaries representing the rows
         """
-        # For small tables, use the LLM to generate data
-        if row_count <= 50:
+        # Determine batch size for LLM generation
+        batch_size = 20  # LLM batch size for efficient generation
+        
+        # For small tables (≤50 rows), use a single LLM call
+        if row_count <= batch_size:
             return self._llm_generate_data(schema, table, row_count, custom_rules)
         
-        # For larger tables, use a hybrid approach (LLM + algorithmic)
-        # First, generate a smaller set with LLM to learn patterns
-        sample_rows = self._llm_generate_data(schema, table, min(20, row_count), custom_rules)
+        # For larger tables, use batched LLM generation
+        all_rows = []
+        remaining_rows = row_count
         
-        # Then, generate the rest algorithmically based on the sample
-        if len(sample_rows) < row_count:
-            additional_rows = self._algorithmic_generate_data(schema, table, row_count - len(sample_rows), sample_rows)
-            sample_rows.extend(additional_rows)
+        # Generate data in batches
+        while remaining_rows > 0:
+            # Determine current batch size
+            current_batch = min(batch_size, remaining_rows)
+            
+            # Generate batch using LLM
+            self.logger.info(f"Generating batch of {current_batch} rows for table '{table.name}' ({len(all_rows)}/{row_count} completed)")
+            batch_rows = self._llm_generate_data(schema, table, current_batch, custom_rules)
+            
+            # If LLM failed to generate any rows, fall back to algorithmic generation
+            if not batch_rows:
+                self.logger.warning(f"LLM generation failed for batch, falling back to algorithmic generation for remaining {remaining_rows} rows")
+                algorithmic_rows = self._algorithmic_generate_data(schema, table, remaining_rows, all_rows if all_rows else None)
+                all_rows.extend(algorithmic_rows)
+                break
+            
+            # Otherwise, add the generated rows and continue
+            all_rows.extend(batch_rows)
+            remaining_rows -= len(batch_rows)
+            
+            # If we didn't get a full batch, fill the gap with algorithmic generation
+            if len(batch_rows) < current_batch:
+                gap = current_batch - len(batch_rows)
+                self.logger.warning(f"LLM generated {len(batch_rows)}/{current_batch} rows, generating {gap} more algorithmically")
+                gap_rows = self._algorithmic_generate_data(schema, table, gap, all_rows)
+                all_rows.extend(gap_rows)
+                remaining_rows -= gap
         
-        return sample_rows
+        return all_rows
     
     def _llm_generate_data(self, 
                          schema: Schema, 
@@ -447,6 +473,7 @@ class DataSynthAgent(Agent):
                 json_str = json_match.group(1)
             else:
                 # If no code blocks, try to find array directly
+                # Improved to handle more cases with proper error handling
                 json_str = response.strip()
                 if not json_str.startswith('['):
                     # Find the first '[' and the last ']'
@@ -455,36 +482,109 @@ class DataSynthAgent(Agent):
                     if start >= 0 and end > start:
                         json_str = json_str[start:end]
                     else:
-                        raise ValueError("No JSON array found in response")
-            
+                        # More aggressive attempt to find a JSON array
+                        pattern = r'\[\s*\{[^\[\]]*\}\s*(?:,\s*\{[^\[\]]*\}\s*)*\]'
+                        match = re.search(pattern, json_str, re.DOTALL)
+                        if match:
+                            json_str = match.group(0)
+                        else:
+                            raise ValueError("No JSON array found in response")
+        
             # Parse the JSON
             data = json.loads(json_str)
+            
+            # Verify we got a list
+            if not isinstance(data, list):
+                raise ValueError("Parsed JSON is not an array")
             
             # Convert data types based on column definitions
             return self._convert_data_types(data, table)
             
         except Exception as e:
             self.logger.error(f"Error parsing generated data: {str(e)}")
-            # Try a simpler, more lenient parsing approach
+            
+            # Attempt 1: Try to find any JSON array with more flexible regex
             try:
-                # Look for anything that might be a JSON array
-                array_pattern = r'\[(.*)\]'
-                match = re.search(array_pattern, response, re.DOTALL)
-                if match:
-                    # Fix common JSON issues
-                    array_str = match.group(0)
-                    # Replace single quotes with double quotes
-                    array_str = array_str.replace("'", '"')
-                    # Fix unquoted keys
-                    array_str = re.sub(r'(\w+):', r'"\1":', array_str)
-                    
-                    data = json.loads(array_str)
-                    return self._convert_data_types(data, table)
-                else:
-                    return []
+                array_pattern = r'\[(.*?)\]'
+                matches = re.findall(array_pattern, response, re.DOTALL)
+                if matches:
+                    # Find the largest match (likely the main data array)
+                    largest_match = max(matches, key=len)
+                    if largest_match.strip().startswith('{'):
+                        # Fix common JSON issues
+                        array_str = f"[{largest_match}]"
+                        # Replace single quotes with double quotes
+                        array_str = array_str.replace("'", '"')
+                        # Fix unquoted keys
+                        array_str = re.sub(r'(\w+):', r'"\1":', array_str)
+                        
+                        data = json.loads(array_str)
+                        return self._convert_data_types(data, table)
             except:
-                # If all else fails, return empty list
-                return []
+                pass
+                
+            # Attempt 2: Try to generate a structured array from table format  
+            try:
+                # Look for tabular data with | separators
+                table_pattern = r'\|([^|]+)\|([^|]+)\|'
+                table_matches = re.findall(table_pattern, response, re.MULTILINE)
+                
+                if table_matches and len(table_matches) > 1:
+                    # First row might be headers
+                    headers = [h.strip() for h in table_matches[0]]
+                    rows = []
+                    
+                    for match in table_matches[1:]:
+                        row = {}
+                        for i, value in enumerate(match):
+                            if i < len(headers):
+                                row[headers[i]] = value.strip()
+                        rows.append(row)
+                    
+                    return self._convert_data_types(rows, table)
+            except:
+                pass
+                
+            # Attempt 3: Generate sample data based on table structure if everything else fails
+            return self._generate_fallback_data(table, 10)  # Generate 10 fallback rows
+    
+    def _generate_fallback_data(self, table: Table, row_count: int) -> List[Dict[str, Any]]:
+        """Generate very basic fallback data when LLM generation fails.
+        
+        Args:
+            table: Table structure
+            row_count: Number of rows to generate
+            
+        Returns:
+            List of basic row dictionaries
+        """
+        self.logger.warning(f"Using fallback data generation for table '{table.name}'")
+        rows = []
+        
+        for i in range(1, row_count + 1):
+            row = {}
+            
+            for column in table.columns:
+                # Generate a basic value based on column type
+                if column.is_numeric:
+                    row[column.name] = i
+                elif column.is_boolean:
+                    row[column.name] = i % 2 == 0  # Alternating True/False
+                elif column.data_type in [ColumnType.DATE, ColumnType.DATETIME]:
+                    # Basic date string
+                    row[column.name] = f"2023-{(i % 12) + 1:02d}-{(i % 28) + 1:02d}"
+                else:
+                    # String type
+                    row[column.name] = f"{column.name}_{i}"
+                    
+                    # Respect length constraints
+                    if column.length and isinstance(column.length, int) and column.length > 0:
+                        if len(row[column.name]) > column.length:
+                            row[column.name] = row[column.name][:column.length]
+            
+            rows.append(row)
+            
+        return rows
     
     def _convert_data_types(self, data: List[Dict[str, Any]], table: Table) -> List[Dict[str, Any]]:
         """Convert data types based on column definitions.
@@ -623,7 +723,16 @@ class DataSynthAgent(Agent):
                     if isinstance(value, str):
                         # Simple variation - append/prepend some random characters
                         suffix = ''.join(random.choices('abcdefghijklmnopqrstuvwxyz', k=2))
-                        new_row[col_name] = f"{value[:5]}{suffix}"[-column.length:] if column.length else f"{value[:5]}{suffix}"
+                        
+                        # Ensure we respect the column's length constraint if specified
+                        if column.length and isinstance(column.length, int) and column.length > 0:
+                            new_value = f"{value[:5]}{suffix}"
+                            if len(new_value) > column.length:
+                                new_row[col_name] = new_value[-column.length:]
+                            else:
+                                new_row[col_name] = new_value
+                        else:
+                            new_row[col_name] = f"{value[:5]}{suffix}"
                     else:
                         new_row[col_name] = str(value)
                 else:
@@ -666,6 +775,31 @@ class DataSynthAgent(Agent):
                     suffix += 1
                 
                 existing_pk_values.add(pk_value)
+            
+            # Fix: Handle different data types with different strategies
+            # Access columns correctly using the list of Column objects, not as a dictionary
+            for column in table.columns:
+                col_name = column.name
+                if col_name not in new_row:
+                    continue
+                
+                # For strings, handle length constraints
+                if column.data_type in [ColumnType.VARCHAR, ColumnType.NVARCHAR, ColumnType.CHAR, ColumnType.NCHAR, ColumnType.TEXT]:
+                    value = str(new_row[col_name])
+                    
+                    # Add some variation by modifying part of the string
+                    if random.random() < 0.5 and len(value) > 3:
+                        suffix = str(random.randint(1, 999))
+                        
+                        # Ensure we respect the column's length constraint if specified
+                        if column.length and isinstance(column.length, int) and column.length > 0:
+                            new_value = f"{value[:5]}{suffix}"
+                            if len(new_value) > column.length:
+                                new_row[col_name] = new_value[-column.length:]
+                            else:
+                                new_row[col_name] = new_value
+                        else:
+                            new_row[col_name] = f"{value[:5]}{suffix}"
             
             additional_rows.append(new_row)
         
