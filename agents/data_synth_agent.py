@@ -411,53 +411,21 @@ class DataSynthAgent(Agent):
         
         fk_section = "\n\n".join(fk_references) if fk_references else "No foreign key references with reference data."
         
-        # Build prompt
-        prompt = f"""# Synthetic Data Generation Task
-
-## Objective
-Generate {row_count} rows of synthetic data for the SQL Server table '{table.name}'.
-
-## Table Structure
-```json
-{table_info}
-```
-
-## Foreign Key Reference Data
-{fk_section}
-
-## Instructions
-1. Generate {row_count} rows of realistic data for this table
-2. Follow all constraints:
-   - Respect data types and length limits for each column
-   - Ensure primary key values are unique
-   - Reference valid foreign key values from related tables
-   - Follow check constraints
-   - Respect NOT NULL constraints
-3. When using reference data with weights, distribute foreign key references proportionally
-4. Create realistic and varied values, avoid repetitive patterns
-5. For columns that are part of both a primary key and foreign key, ensure values don't conflict
-
-## Output Format
-Return ONLY a JSON array of objects, with each object representing a row.
-Each object should have column names as keys and values should be appropriate for the column data type.
-
-Example:
-```json
-[
-  {{
-    "column1": "value1",
-    "column2": 42,
-    ...
-  }},
-  ...
-]
-```
-"""
-        
-        # Add custom rules if provided
+        # Add custom rules section if provided
+        custom_rules_section = ""
         if custom_rules and table.name in custom_rules:
             rules_str = json.dumps(custom_rules[table.name], indent=2)
-            prompt += f"\n## Custom Generation Rules\n```json\n{rules_str}\n```\n"
+            custom_rules_section = f"\n## Custom Generation Rules\n```json\n{rules_str}\n```\n"
+        
+        # Load and format the prompt template
+        prompt_template = self.load_prompt("generate_data")
+        prompt = prompt_template.format(
+            row_count=row_count,
+            table_name=table.name,
+            table_info=table_info,
+            fk_section=fk_section,
+            custom_rules_section=custom_rules_section
+        )
         
         return prompt
     

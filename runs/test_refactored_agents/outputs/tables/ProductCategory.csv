@@ -1,0 +1,4 @@
+CategoryID,CategoryName,CategoryDescription,IsActive
+1,Electronics,"Devices and gadgets including phones, laptops, and more",True
+2,Home Appliances,"Appliances for home use such as refrigerators, microwaves, etc.",True
+3,Outdoor Equipment,Gear and tools for outdoor activities and sports,False

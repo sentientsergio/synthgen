@@ -122,8 +122,12 @@ class SchemaParseAgent(Agent):
         # Generate JSON schema template for the IR
         schema_template = self._get_schema_template(schema_name)
         
-        # Create prompt for the LLM
-        prompt = self._create_parse_prompt(sql_script, schema_name)
+        # Create prompt for the LLM using externalized prompt template
+        prompt_template = self.load_prompt("parse_schema")
+        prompt = prompt_template.format(
+            sql_script=sql_script,
+            schema_name=schema_name
+        )
         
         # Store for retry logic
         self._last_prompt = prompt
@@ -143,7 +147,8 @@ class SchemaParseAgent(Agent):
                 model=self.llm_model
             )
             
-            self.save_artifact("llm_response", json.dumps(schema_json, indent=2), is_json=True)
+            # Save the response
+            self.save_llm_response(json.dumps(schema_json, indent=2), "schema")
             
             # Convert the JSON response to a Schema object
             schema = self._create_schema_from_llm_response(schema_json)
@@ -409,6 +414,8 @@ class SchemaParseAgent(Agent):
     def _create_parse_prompt(self, sql_script: str, schema_name: str) -> str:
         """Create a prompt for parsing SQL to Schema.
         
+        This method is kept for backward compatibility but now uses the externalized prompt template.
+        
         Args:
             sql_script: SQL CREATE script content
             schema_name: Name to use for the schema
@@ -416,88 +423,11 @@ class SchemaParseAgent(Agent):
         Returns:
             Prompt for the LLM
         """
-        prompt = f"""# SQL Schema Analysis Task
-
-## Objective
-Analyze the provided SQL Server CREATE script and transform it into a structured Schema representation.
-
-## Schema Name
-{schema_name}
-
-## SQL Script to Analyze
-```sql
-{sql_script}
-```
-
-## Instructions
-1. Extract all tables from the script
-2. For each table, identify:
-   - Table name and description
-   - All columns with their names, data types, nullability, etc.
-   - Primary key constraints
-   - Foreign key constraints
-   - Check constraints
-3. Determine relationships between tables
-4. Format the output as a JSON object matching the provided schema template EXACTLY
-
-## Output Format Requirements
-Your output MUST conform to this exact structure, with these exact property names:
-
-```json
-{{
-  "name": "SchemaName",  // <-- This must be exactly "name", not "schemaName"
-  "tables": [            // <-- This must be exactly "tables", not "Tables"
-    {{
-      "name": "TableName",  // <-- This must be exactly "name", not "tableName"
-      "description": "Description of the table",
-      "columns": [          // <-- This must be exactly "columns", not "Columns"
-        {{
-          "name": "ColumnName",
-          "data_type": {{   // <-- This must be a nested object with the format below
-            "name": "DataTypeName", // e.g., "INTEGER", "VARCHAR", etc.
-            "length": 50,    // Optional, for string types
-            "precision": 10, // Optional, for numeric types
-            "scale": 2       // Optional, for numeric types
-          }},
-          "nullable": true,  // Boolean - must be exactly "nullable", not "isNullable"
-          "default_value": "DefaultValue",  // Optional
-          "is_identity": false,  // Boolean
-          "description": "Description of the column"  // Optional
-        }}
-      ],
-      "primary_key": {{   // <-- Optional, null if not present
-        "name": "PKName",
-        "columns": ["ColumnName"]
-      }},
-      "foreign_keys": [   // <-- Array, empty if not present
-        {{
-          "name": "FKName",
-          "columns": ["ColumnName"],
-          "ref_table": "ReferencedTable",
-          "ref_columns": ["ReferencedColumn"],
-          "on_delete": "OnDeleteAction",  // Optional
-          "on_update": "OnUpdateAction"   // Optional
-        }}
-      ],
-      "check_constraints": [   // <-- Array, empty if not present
-        {{
-          "name": "CheckName",
-          "definition": "CheckDefinition"
-        }}
-      ],
-      "is_reference_table": false  // <-- Boolean
-    }}
-  ],
-  "description": "Description of the overall schema",
-  "generation_rules": []  // <-- Empty array for this initial schema
-}}
-```
-
-Use your understanding of SQL Server syntax to properly interpret the script and create an accurate representation of the database schema. Include all constraints, even if they're defined separately from the table creation.
-
-IMPORTANT: Follow the EXACT format above, including the exact property names as shown in the example. Ensure your response is a valid JSON object that exactly follows this structure.
-"""
-        return prompt
+        prompt_template = self.load_prompt("parse_schema")
+        return prompt_template.format(
+            sql_script=sql_script,
+            schema_name=schema_name
+        )
     
     def _get_schema_template(self, schema_name: str) -> Dict[str, Any]:
         """Get the JSON schema template for the IR.

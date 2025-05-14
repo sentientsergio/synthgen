@@ -223,14 +223,19 @@ class RefDataAgent(Agent):
         with open(file_path, 'r', encoding='utf-8') as f:
             ref_data_content = f.read()
         
-        # Prepare the prompt for the LLM
-        prompt = self._prepare_mapping_prompt(schema, ref_data_content)
-        self.save_artifact("prompt", prompt)
+        # Prepare the prompt for the LLM using externalized prompt template
+        prompt_template = self.load_prompt("mapping")
+        prompt = prompt_template.format(
+            schema_json=schema.to_json(indent=2),
+            ref_data_content=ref_data_content
+        )
+        
+        self.save_prompt(prompt)
         
         # Call the LLM
         try:
             response = self.llm_call(prompt)
-            self.save_artifact("llm_response", response)
+            self.save_llm_response(response, "mapping")
             
             # Parse the LLM response to get the mapping
             mapping = self._parse_mapping_response(response)
@@ -289,6 +294,8 @@ class RefDataAgent(Agent):
         """
         Prepare a prompt for the LLM to map reference data to schema tables.
         
+        This method is kept for backward compatibility but now uses the externalized prompt template.
+        
         Args:
             schema: The Schema IR
             ref_data_content: Content of the reference data file
@@ -296,31 +303,11 @@ class RefDataAgent(Agent):
         Returns:
             Prompt string for the LLM
         """
-        prompt = (
-            "# Task: Map Reference Data to Schema Tables\n\n"
-            "You are a data expert who needs to map reference data to the appropriate tables in a database schema.\n\n"
-            "## Schema Information\n\n"
-            f"```json\n{schema.to_json(indent=2)}\n```\n\n"
-            "## Reference Data Content\n\n"
-            f"```\n{ref_data_content}\n```\n\n"
-            "## Instructions\n\n"
-            "1. Analyze the schema and reference data\n"
-            "2. Identify which reference data tables should map to which schema tables\n"
-            "3. Consider table name similarity, column names, and data content\n"
-            "4. Create a mapping in JSON format\n\n"
-            "## Output Format\n\n"
-            "Return ONLY a JSON object with the following structure:\n\n"
-            "```json\n"
-            "{\n"
-            '  "mapping": {\n'
-            '    "RefSchemaName.RefTableName": "SchemaTableName",\n'
-            '    "RefSchemaName.AnotherRefTable": "AnotherSchemaTable"\n'
-            "  }\n"
-            "}\n"
-            "```\n\n"
-            "If you can't find a matching schema table for a reference table, omit it from the mapping.\n"
+        prompt_template = self.load_prompt("mapping")
+        return prompt_template.format(
+            schema_json=schema.to_json(indent=2),
+            ref_data_content=ref_data_content
         )
-        return prompt
     
     def _parse_mapping_response(self, response: str) -> Dict[str, str]:
         """

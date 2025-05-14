@@ -1,0 +1,3 @@
+1,Wireless Mouse,A high-precision wireless mouse with ergonomic design.,1,29.99,False,2023-10-01T10:00:00,2023-10-02T15:30:00
+2,Bluetooth Headphones,Noise-cancelling over-ear headphones with Bluetooth connectivity.,2,89.99,False,2023-10-05T11:00:00,None
+3,USB-C Charger,Fast-charging USB-C charger compatible with multiple devices.,3,19.99,True,2023-09-20T09:00:00,2023-10-01T12:00:00
